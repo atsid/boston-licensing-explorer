@@ -1,0 +1,16 @@
+html, body, #map-canvas {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#map-canvas {
+    height: 95%;
+    margin: 0;
+    padding: 0;
+}
+
+#controls {
+    margin: 10px;
+    text-align: center;
+}
