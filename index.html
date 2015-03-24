@@ -2,32 +2,65 @@
 <html>
     <head>
         <style type="text/css">
-            html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+            html, body, #map-canvas {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            #map-canvas {
+                height: 95%;
+                margin: 0;
+                padding: 0;
+            }
+            #controls {
+                margin: 10px;
+                text-align: center;
+            }
         </style>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
         <script type="text/javascript">
+            var map,
+                layers = [];
+
             function initialize() {
                 var boston = { lat: 42.3601, lng: -71.0589 };
                 var mapOptions = {
                     center: boston,
                     zoom: 11
                 };
-                var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-                var layer = new google.maps.KmlLayer({
+                map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                
+                var tracts = new google.maps.KmlLayer({
                     url: 'http://labs.atsid.com/hubhacks2/data/cb_2013_25_bg_500k.kmz'
                 });
-                // var layer = new google.maps.FusionTablesLayer({
-                //     query: {
-                //         select: 'address',
-                //         from: '1XFIER_sMIIC1LqEfl9Rxt7XKy-eHR0pw_dSMDPSe'
-                //     }
-                // });
-                layer.setMap(map);
+                tracts.setMap(map);
             }
+
+            function displayRestaurants() {
+                var restaurants = layers['restaurants'];
+
+                if (restaurants) {
+                    restaurants.setMap(null);
+                    layers['restaurants'] = '';
+                } else {
+                    restaurants = new google.maps.FusionTablesLayer({
+                        query: {
+                            select: 'address',
+                            from: '1XFIER_sMIIC1LqEfl9Rxt7XKy-eHR0pw_dSMDPSe'
+                        }
+                    });
+                    restaurants.setMap(map);
+                    layers['restaurants'] = restaurants
+                }
+            }
+
             google.maps.event.addDomListener(window, 'load', initialize);
         </script>
     </head>
     <body>
         <div id="map-canvas"></div>
+        <div id="controls">
+            <button type="button" onclick="displayRestaurants()">Toggle Restaurants</button>
+        </div>
     </body>
 </html>
