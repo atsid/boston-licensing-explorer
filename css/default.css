@@ -16,7 +16,12 @@ html, body, #map-canvas {
     width: 240px;
 }
 
-#controls button {
+.checkboxes {
+    margin-left: 10px;
+    text-align: left;
+}
+
+.cb {
     margin: 2px;
     display: block;
 }
