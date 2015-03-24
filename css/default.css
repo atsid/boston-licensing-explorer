@@ -25,3 +25,11 @@ html, body, #map-canvas {
     margin: 2px;
     display: block;
 }
+
+.cb label {
+    cursor: pointer;
+}
+
+.cb img {
+    margin: 2px 0px;
+}
