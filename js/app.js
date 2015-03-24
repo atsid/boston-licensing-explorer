@@ -1,5 +1,28 @@
 var map,
-    layers = [];
+    layers = [],
+    tables = {
+        'license_liquor' : {
+            type: 'fusion',
+            field: 'address',
+            id: '1e0VQIZsvVlQIJzV_cyDhiN7LQC5J3Oxp-PXnd0AK',
+            template: 2,
+            style: 2
+        },
+        'license_food': {
+            type: 'fusion',
+            field: 'address',
+            id: '1XFIER_sMIIC1LqEfl9Rxt7XKy-eHR0pw_dSMDPSe',
+            template: 1,
+            style: 1
+        },
+        'license_entertainment': {
+            type: 'fusion',
+            field: 'address',
+            id: '1B3Vjkdd2zr9fmcn0vNjMlPlu6U6VkFYSFV3pMWmD',
+            template: 3,
+            style: 3
+        }
+    };
 
 function initialize() {
     var boston = { lat: 42.3601, lng: -71.0589 };
@@ -16,13 +39,18 @@ function initialize() {
 }
 
 function createLayer(name) {
-    var layer, obj;
-    if (name === 'license_food') {
+    var table, layer, obj;
+
+    table = tables[name];
+
+    if (table.type === 'fusion') {
         layer = new google.maps.FusionTablesLayer({
             query: {
-                select: 'address',
-                from: '1XFIER_sMIIC1LqEfl9Rxt7XKy-eHR0pw_dSMDPSe'
-            }
+                select: table.field,
+                from: table.id
+            },
+            templateId: table.template,
+            styleId: table.style
         });
         obj = {
             layer: layer,

@@ -14,3 +14,7 @@ html, body, #map-canvas {
     margin: 10px;
     text-align: center;
 }
+
+#controls button {
+    margin: 2px;
+}
