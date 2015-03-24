@@ -33,7 +33,7 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     
     var tracts = new google.maps.KmlLayer({
-        url: 'http://labs.atsid.com/hubhacks2/data/cb_2013_25_bg_500k.kmz'
+        url: 'http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.kmz'
     });
     tracts.setMap(map);
 }
