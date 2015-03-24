@@ -28,14 +28,31 @@ function initialize() {
     var boston = { lat: 42.3601, lng: -71.0589 };
     var mapOptions = {
         center: boston,
-        zoom: 11
+        zoom: 12
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-    
-    var tracts = new google.maps.KmlLayer({
-        url: 'http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.kmz'
+
+    map.data.loadGeoJson('http://labs.atsid.com/hubhacks2/data/cb_2013_25_017-021-025_tract_500k.geojson');
+
+    map.data.setStyle(function(feature) {
+        var selected = feature.getProperty('selected');
+
+        return ({
+            fillOpacity: selected ? 0.2 : 0,
+            fillColor: 'black',
+            strokeColor: 'green',
+            strokeWeight: 2
+        });
     });
-    tracts.setMap(map);
+    map.data.addListener('click', function(event) {
+        var selected = event.feature.getProperty('selected');
+        event.feature.setProperty('selected', !selected);
+    });
+
+//    var tracts = new google.maps.KmlLayer({
+//        url: 'http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.kmz'
+//    });
+//    tracts.setMap(map);
 }
 
 function createLayer(name) {
