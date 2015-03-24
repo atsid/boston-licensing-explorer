@@ -5,7 +5,6 @@ html, body, #map-canvas {
 }
 
 #map-canvas {
-    height: 95%;
     margin: 0;
     padding: 0;
 }
@@ -13,8 +12,11 @@ html, body, #map-canvas {
 #controls {
     margin: 10px;
     text-align: center;
+    float: left;
+    width: 240px;
 }
 
 #controls button {
     margin: 2px;
+    display: block;
 }

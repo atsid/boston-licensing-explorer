@@ -44,9 +44,14 @@ function initialize() {
             strokeWeight: 2
         });
     });
+
     map.data.addListener('click', function(event) {
         var selected = event.feature.getProperty('selected');
         event.feature.setProperty('selected', !selected);
+    });
+
+    map.data.addListener('mouseover', function(event) {
+        document.getElementById('feature-details').innerHTML = event.feature.getProperty('description');
     });
 
 //    var tracts = new google.maps.KmlLayer({
