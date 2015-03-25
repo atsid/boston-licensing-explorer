@@ -1,32 +1,27 @@
 //methods for working with keyed fields, so they can be referenced by enum-like values instead of
 //difficult-to-read census field headers
-define([], function () {
+define(['module'], function (module) {
 
-    var config;
+    var config = module.config(),
+        fields = {};
 
-    return {
+    //add each config item as a root object with convenience methods
+    Object.keys(config).forEach(function (field) {
+        fields[field] = config[field];
+        fields[field].get = function (item) {
+            return item[this.key];
+        };
+    });
 
-        setConfig: function (config) {
-
-            this.config = config;
-
-            //add each config item as a root object with convenience methods
-            Object.keys(config).forEach(function (field) {
-                this[field] = config[field];
-                this[field].get = function (item) {
-                    return item[this.key];
-                };
-            }, this);
-        },
-
-        //gets the list of raw census keys
-        getKeys: function () {
-            var keys = [], config = this.config;
-            Object.keys(config).forEach(function (key) {
-                keys.push(config[key].key);
-            }, this);
-            return keys;
-        }
+    //gets the list of raw census keys
+    fields.getKeys = function () {
+        var keys = [];
+        Object.keys(config).forEach(function (key) {
+            keys.push(config[key].key);
+        });
+        return keys;
     };
+
+    return fields;
 
 });

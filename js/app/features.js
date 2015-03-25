@@ -1,14 +1,17 @@
-define([], function () {
+define([
+    'module',
+    './fields'
+], function (
+    module,
+    fields
+) {
 
-    var data,
-        opts = { idPropertyName: 'GEOID' },
-        fields,
+    var config = module.config(),
+        colors = config.colors,
+        income_bins = config.income_bins,
+        opts = config.opts,
+        data,
         map;
-
-    //http://www.colourlovers.com/palette/84571/echo
-    var colors = ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D'],
-    //this is pretty arbitrary, but ramps up to capture a little more granularity in the more common < 100k bins
-        income_bins = [20000, 60000, 80000, 100000, 150000];
 
     var findIncomeBin = function (income) {
         var index = income_bins.length - 1;
@@ -23,9 +26,8 @@ define([], function () {
     
     return {
 
-        init: function (assignedMap, assignedFields) {
+        init: function (assignedMap) {
             map = assignedMap;
-            fields = assignedFields;
         },
 
         renderer: function (feature) {

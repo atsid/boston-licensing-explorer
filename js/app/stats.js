@@ -1,18 +1,21 @@
 //stats on data
-define([], function () {
-    
-    return {
+define([
+    'module'
+], function (
+    module
+) {
 
-        setKeys: function (keys) {
-            this.keys = keys;
-        },
+    var config = module.config(),
+        keys = config.keys;
+
+    return {
 
         //run some basic stats against the dataset, for each key specified
         run: function (data) {
 
             this.data = data;
             this.stats = {};
-            this.keys.forEach(function (key) {
+            keys.forEach(function (key) {
                 this.stats[key] = {
                     count: 0,
                     sum: 0,
@@ -23,7 +26,7 @@ define([], function () {
 
             Object.keys(data).forEach(function (geoid) {
                 var item = data[geoid];
-                this.keys.forEach(function (key) {
+                keys.forEach(function (key) {
                     var stat = this.stats[key],
                         val = item[key];
                     if (val) { //some census data is missing
@@ -36,7 +39,7 @@ define([], function () {
                 }, this);
             }, this);
 
-            this.keys.forEach(function (key) {
+            keys.forEach(function (key) {
                 this.stats[key].avg = this.stats[key].sum / this.stats[key].count;
             }, this);
 

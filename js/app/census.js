@@ -6,13 +6,6 @@ define([
     $
 ) {
 
-    //this gets fields documented here: http://www2.census.gov/geo/tiger/TIGER_DP/2013ACS/Metadata/County_and_Place_Metadata_2013.txt
-    //TODO: make this much more configurable so we can instantiate Census with a set of config params
-    var fields = {
-        'B19013_001E': 'Median Income',
-        'B01003_001E': 'Total Population'
-    };
-
     return {
 
         load: function (url, callback) {
