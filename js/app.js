@@ -15,10 +15,21 @@
 
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-            var features = new atsid.Features(
-                map,
-                'http://labs.atsid.com/hubhacks2/data/cb_2013_25_017-021-025_tract_500k.geojson'
-            );
+            //load the features, then load the census data and pass it to the features for drilldown
+            var features = new atsid.Features(map);
+            var census = new atsid.Census();
+
+            features.load('http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.geojson', function () {
+
+                census.load(
+                    'http://api.census.gov/data/2013/acs5?get=B19013_001E,B01003_001E&for=tract:*&in=state:25+county:*',
+                    function (data) {
+                        console.log('census hash', data);
+                        features.setData(data);
+                    });
+
+            });
+
 
             var layers = new atsid.Layers(map);
 

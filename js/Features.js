@@ -3,14 +3,14 @@
 
     scope.atsid = scope.atsid || {};
     //create a Features instance for the current map, using data from specified url.
-    scope.atsid.Features = function (map, url, options) {
+    scope.atsid.Features = function (map, options) {
 
         var data,
             opts = options || {
-                idPropertyName: 'name'
+                idPropertyName: 'GEOID'
             };
 
-        http://www.colourlovers.com/palette/84571/echo
+        //http://www.colourlovers.com/palette/84571/echo
         var colors = ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D'];
 
         this.renderer = function (feature) {
@@ -27,34 +27,57 @@
 
         };
 
-        //capture the loaded data in closure
-        map.data.loadGeoJson(url, opts, function () {
+        this.load = function (url, callback) {
 
-            data = map.data;
+            map.data.loadGeoJson(url, opts, function () {
 
-            data.setStyle(this.renderer);
+                var d = map.data;
 
-            function click () {
-                var previous;
-                return function (event) {
-                    var feature = event.feature;
-                    console.log(feature.getId() + ' clicked');
-                    if (previous) {
-                        data.getFeatureById(previous).setProperty('selected', false);
+                d.setStyle(this.renderer);
+
+                function click () {
+                    var previous;
+                    return function (event) {
+                        var feature = event.feature,
+                            id = feature.getId();
+                        console.log(id + ' clicked');
+                        console.log(feature);
+                        if (previous) {
+                            d.getFeatureById(previous).setProperty('selected', false);
+                        }
+                        previous = id;
+                        feature.setProperty('selected',true);
                     }
-                    previous = feature.getId();
-                    feature.setProperty('selected',true);
                 }
-            }
 
-            function mouseover (event) {
-                document.getElementById('feature-details').innerHTML = event.feature.getProperty('description');
-            }
+                function mouseover (event) {
 
-            data.addListener('click', click().bind(this));
-            data.addListener('mouseover', mouseover.bind(this));
+                    var feature = event.feature,
+                        id = feature.getId(),
+                        item;
 
-        }.bind(this));
+                    document.getElementById('feature-details').innerHTML = feature.getProperty('description'); //TODO: this can now be crafted from direct attrs
+
+                    if (data && (item = data[id])) {
+                        document.getElementById('data-details').innerHTML = 'Median Income : $' + item['B19013_001E'] + '<br> Total Population: ' + item['B01003_001E'];
+                    }
+                }
+
+                d.addListener('click', click().bind(this));
+                d.addListener('mouseover', mouseover.bind(this));
+
+                if (callback) {
+                    callback.call(this);
+                }
+
+            }.bind(this));
+
+        };
+
+        //set a key/value hash of data that the features can look into
+        this.setData = function (dataHash) {
+            data = dataHash;
+        };
 
     };
 
