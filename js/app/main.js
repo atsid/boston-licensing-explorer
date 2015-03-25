@@ -23,16 +23,19 @@ define([
             census.load(
                 'http://api.census.gov/data/2013/acs5?get=' + fields.getKeys().join(',') + '&for=tract:*&in=state:25+county:*',
                 function (data) {
+
                     console.log('census hash', data);
 
-                    features.setData(data);
-
-                    features.load('http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.geojson', function () {
-                        stats.run(data);
-                        fields.getKeys().forEach(function (field) {
-                            console.log('stats for ' + field, stats.stats[field]);
-                        });
-                    });
+                    features.load(
+                        'http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.geojson',
+                        data,
+                        function () {
+                            stats.run(data);
+                            fields.getKeys().forEach(function (field) {
+                                console.log('stats for ' + field, stats.stats[field]);
+                            });
+                        }
+                    );
 
                 }
             );

@@ -18,7 +18,7 @@ requirejs.config({
             colors: ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D'],
             //this is pretty arbitrary, but ramps up to capture a little more granularity in the more common < 100k bins
             income_bins: [20000, 60000, 80000, 100000, 150000],
-            //these are the geojson opts used maps api loadGeoJson
+            //these are the geojson opts used for maps api loadGeoJson
             opts: { idPropertyName: 'GEOID' }
         },
         //field codes documented here: http://www2.census.gov/geo/tiger/TIGER_DP/2013ACS/Metadata/County_and_Place_Metadata_2013.txt

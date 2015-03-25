@@ -11,8 +11,7 @@ define([
     var config = module.config(),
         colors = config.colors,
         income_bins = config.income_bins,
-        opts = config.opts,
-        data;
+        opts = config.opts;
 
     var findIncomeBin = function (income) {
         var index = income_bins.length - 1;
@@ -30,16 +29,9 @@ define([
         renderer: function (feature) {
             var selected = feature.getProperty('selected'),
                 hovered = feature.getProperty('hovered'),
-                id = feature.getId(),
-                income = 0,
-                bin,
-                color = '#999';
-
-            if (data) {
-                income = fields.INCOME.get(data[id]);
-                bin = findIncomeBin(income);
-                color = colors[bin];
-            }
+                income = feature.getProperty('INCOME'),
+                bin = findIncomeBin(income),
+                color = colors[bin] || '#999';
 
             return ({
                 fillOpacity: (selected || hovered) ? 0.8 : 0.6,
@@ -51,7 +43,8 @@ define([
 
         },
 
-        load: function (url, callback) {
+        load: function (url, data, callback) {
+
             map.data.loadGeoJson(url, opts, function () {
 
                 var d = map.data;
@@ -97,17 +90,21 @@ define([
                 d.addListener('click', click().bind(this));
                 d.addListener('mouseover', mouseover().bind(this));
 
+                //map our data hash values into the features
+                d.forEach(function (feature) {
+                    var id = feature.getId(),
+                        d = data[id];
+                    fields.forEach(function (field) {
+                        feature.setProperty(field.field, d[field.key]);
+                    });
+                });
+
                 if (callback) {
                     callback.call(this);
                 }
 
             }.bind(this));
 
-        },
-
-        //set a key/value hash of data that the features can look into
-        setData: function (dataHash) {
-            data = dataHash;
         }
 
     };

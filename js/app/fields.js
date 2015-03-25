@@ -8,6 +8,7 @@ define(['module'], function (module) {
     //add each config item as a root object with convenience methods
     Object.keys(config).forEach(function (field) {
         fields[field] = config[field];
+        fields[field].field = field;
         fields[field].get = function (item) {
             return item[this.key];
         };
@@ -20,6 +21,13 @@ define(['module'], function (module) {
             keys.push(config[key].key);
         });
         return keys;
+    };
+
+    //iterator that applies a function to each of the keys
+    fields.forEach = function (func, scope) {
+        Object.keys(config).forEach(function (field) {
+            func.call(scope, fields[field]);
+        });
     };
 
     return fields;
