@@ -59,7 +59,7 @@
                     document.getElementById('feature-details').innerHTML = feature.getProperty('description'); //TODO: this can now be crafted from direct attrs
 
                     if (data && (item = data[id])) {
-                        document.getElementById('data-details').innerHTML = 'Median Income : $' + item['B19013_001E'] + '<br> Total Population: ' + item['B01003_001E'];
+                        document.getElementById('data-details').innerHTML = 'Median Income : $' + (item['B19013_001E'] || 0)  + '<br> Total Population: ' + item['B01003_001E'];
                     }
                 }
 
