@@ -1,4 +1,8 @@
-define([], function () {
+define([
+    './map'
+], function (
+    map
+) {
 
     var layers = {},
         tables = {
@@ -23,14 +27,9 @@ define([], function () {
                 template: 3,
                 style: 3
             }
-        },
-        map;
+        };
 
     return {
-
-        setMap: function (map) {
-            this.map = map;
-        },
 
         //creates a fusion layer, mapping into the config by name
         createLayer: function (name) {
@@ -59,8 +58,7 @@ define([], function () {
 
         //displays a specified layer
         displayLayer: function (name) {
-            var layer = layers[name],
-                map = this.map;
+            var layer = layers[name];
 
             if (!layer) {
                 layer = this.createLayer(name);

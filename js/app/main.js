@@ -1,5 +1,6 @@
 define([
     'module',
+    './map',
     './census',
     './features',
     './fields',
@@ -7,6 +8,7 @@ define([
     './stats'
 ], function (
     module,
+    map,
     census,
     features,
     fields,
@@ -14,16 +16,10 @@ define([
     stats
 ) {
     return {
+
         initialize: function () {
 
-            var config = module.config(),
-                mapOptions = config.map;
-
-            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-            //load the features, then load the census data and pass it to the features for drilldown
-            features.init(map);
-
+            //load the census data first, then pass it into the feature manager so it is ready for when the feature data returns
             census.load(
                 'http://api.census.gov/data/2013/acs5?get=' + fields.getKeys().join(',') + '&for=tract:*&in=state:25+county:*',
                 function (data) {
@@ -41,10 +37,7 @@ define([
                 }
             );
 
-            layers.setMap(map);
-
             var checks = document.getElementsByClassName('cb');
-
             for (var i = 0; i < checks.length; i += 1) {
                 checks[i].addEventListener('change', function (e) {
                     layers.displayLayer(e.target.id);

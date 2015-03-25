@@ -1,17 +1,18 @@
 define([
     'module',
-    './fields'
+    './fields',
+    './map'
 ], function (
     module,
-    fields
+    fields,
+    map
 ) {
 
     var config = module.config(),
         colors = config.colors,
         income_bins = config.income_bins,
         opts = config.opts,
-        data,
-        map;
+        data;
 
     var findIncomeBin = function (income) {
         var index = income_bins.length - 1;
@@ -25,10 +26,6 @@ define([
     };
     
     return {
-
-        init: function (assignedMap) {
-            map = assignedMap;
-        },
 
         renderer: function (feature) {
             var selected = feature.getProperty('selected'),

@@ -5,12 +5,13 @@ requirejs.config({
         'jquery': 'http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min'
     },
     'config': {
-        'app/main': {
+        'app/map': {
             //starting zoom and map centering options
             map: {
                 center: { lat: 42.3601, lng: -71.0589 },
                 zoom: 12
-            }
+            },
+            element: 'map-canvas'
         },
         'app/features': {
             //http://www.colourlovers.com/palette/84571/echo
