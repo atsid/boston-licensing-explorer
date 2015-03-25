@@ -1,33 +1,34 @@
-//constructor for dealing with the main dataset.
-(function (scope) {
+define([], function () {
 
-    scope.atsid = scope.atsid || {};
-    //create a Features instance for the current map, using data from specified url.
-    scope.atsid.Features = function (map, fields, options) {
+    var data,
+        opts = { idPropertyName: 'GEOID' },
+        fields,
+        map;
 
-        var data,
-            opts = options || {
-                idPropertyName: 'GEOID'
-            };
+    //http://www.colourlovers.com/palette/84571/echo
+    var colors = ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D'],
+    //this is pretty arbitrary, but ramps up to capture a little more granularity in the more common < 100k bins
+        income_bins = [20000, 60000, 80000, 100000, 150000];
 
-        //http://www.colourlovers.com/palette/84571/echo
-        var colors = ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D'],
-            //this is pretty arbitrary, but ramps up to capture a little more granularity in the more common < 100k bins
-            income_bins = [20000, 60000, 80000, 100000, 150000];
+    var findIncomeBin = function (income) {
+        var index = income_bins.length - 1;
+        income_bins.some(function (bin, idx) {
+            if (income < bin) {
+                index = idx;
+                return true;
+            }
+        });
+        return index;
+    };
+    
+    return {
 
-        function findIncomeBin(income) {
-            var index = income_bins.length - 1;
-            income_bins.some(function (bin, idx) {
-                if (income < bin) {
-                    index = idx;
-                    return true;
-                }
-            });
-                return index;
-        }
+        init: function (assignedMap, assignedFields) {
+            map = assignedMap;
+            fields = assignedFields;
+        },
 
-        this.renderer = function (feature) {
-
+        renderer: function (feature) {
             var selected = feature.getProperty('selected'),
                 hovered = feature.getProperty('hovered'),
                 id = feature.getId(),
@@ -49,10 +50,9 @@
                 zIndex: selected ? 2 : hovered ? 1 : 0
             });
 
-        };
+        },
 
-        this.load = function (url, callback) {
-
+        load: function (url, callback) {
             map.data.loadGeoJson(url, opts, function () {
 
                 var d = map.data;
@@ -92,10 +92,7 @@
                         }
                         previous = id;
                         feature.setProperty('hovered',true);
-
                     }
-
-
                 }
 
                 d.addListener('click', click().bind(this));
@@ -107,13 +104,13 @@
 
             }.bind(this));
 
-        };
+        },
 
         //set a key/value hash of data that the features can look into
-        this.setData = function (dataHash) {
+        setData: function (dataHash) {
             data = dataHash;
-        };
+        }
 
     };
 
-})(this);
+});

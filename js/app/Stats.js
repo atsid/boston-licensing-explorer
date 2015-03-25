@@ -1,13 +1,14 @@
 //stats on data
-(function (scope) {
+define([], function () {
+    
+    return {
 
-    scope.atsid = scope.atsid || {};
-    scope.atsid.Stats = function (keys) {
-
-        this.keys = keys;
+        setKeys: function (keys) {
+            this.keys = keys;
+        },
 
         //run some basic stats against the dataset, for each key specified
-        this.run = function (data) {
+        run: function (data) {
 
             this.data = data;
             this.stats = {};
@@ -39,8 +40,8 @@
                 this.stats[key].avg = this.stats[key].sum / this.stats[key].count;
             }, this);
 
-        };
+        }
 
     };
 
-})(this);
+});
