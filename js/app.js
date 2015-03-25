@@ -13,20 +13,27 @@
                 center: boston,
                 zoom: 12
             };
-            var fields = {
-                'B19013_001E': 'Median Income',
-                'B01003_001E': 'Total Population'
+            var fieldConfig = {
+                'INCOME': {
+                    key: 'B19013_001E',
+                    label: 'Median Income'
+                },
+                'POP': {
+                    key: 'B01003_001E',
+                    label: 'Total Population'
+                }
             };
 
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
+            var fields = new atsid.Fields(fieldConfig);
             //load the features, then load the census data and pass it to the features for drilldown
-            var features = new atsid.Features(map);
+            var features = new atsid.Features(map, fields);
             var census = new atsid.Census();
-            var stats = new atsid.Stats(['B19013_001E', 'B01003_001E']);
+            var stats = new atsid.Stats(fields.getKeys());
 
             census.load(
-                'http://api.census.gov/data/2013/acs5?get=B19013_001E,B01003_001E&for=tract:*&in=state:25+county:*',
+                'http://api.census.gov/data/2013/acs5?get=' + fields.getKeys().join(',') + '&for=tract:*&in=state:25+county:*',
                 function (data) {
                     console.log('census hash', data);
 
@@ -35,7 +42,7 @@
                     features.load('http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.geojson', function () {
 
                         stats.run(data);
-                        Object.keys(fields).forEach(function (field) {
+                        fields.getKeys().forEach(function (field) {
                             console.log('stats for ' + field, stats.stats[field]);
                         });
 

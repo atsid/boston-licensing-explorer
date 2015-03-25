@@ -3,7 +3,7 @@
 
     scope.atsid = scope.atsid || {};
     //create a Features instance for the current map, using data from specified url.
-    scope.atsid.Features = function (map, options) {
+    scope.atsid.Features = function (map, fields, options) {
 
         var data,
             opts = options || {
@@ -36,7 +36,7 @@
                 color = '#999';
 
             if (data) {
-                income = data[id]['B19013_001E'];
+                income = fields.INCOME.get(data[id]);
                 bin = findIncomeBin(income);
                 color = colors[bin];
             }
@@ -84,7 +84,7 @@
                         document.getElementById('feature-details').innerHTML = feature.getProperty('description'); //TODO: this can now be crafted from direct attrs
 
                         if (data && (item = data[id])) {
-                            document.getElementById('data-details').innerHTML = 'Median Income : $' + (item['B19013_001E'] || 0)  + '<br> Total Population: ' + item['B01003_001E'];
+                            document.getElementById('data-details').innerHTML = fields.INCOME.label + ': $' + (fields.INCOME.get(item) || 0)  + '<br> ' + fields.POP.label + ': ' + fields.POP.get(item);
                         }
 
                         if (previous) {
