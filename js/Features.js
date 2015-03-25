@@ -10,15 +10,19 @@
                 idPropertyName: 'name'
             };
 
+        http://www.colourlovers.com/palette/84571/echo
+        var colors = ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D'];
+
         this.renderer = function (feature) {
 
             var selected = feature.getProperty('selected');
 
             return ({
-                fillOpacity: selected ? 0.2 : 0,
-                fillColor: 'black',
-                strokeColor: 'green',
-                strokeWeight: 2
+                fillOpacity: selected ? 0.7 : 0.5,
+                fillColor: colors[Math.round(Math.random() * 5)], //totally random with each render right now
+                strokeColor: selected ? '#136EFB' : '#444',
+                strokeWeight: selected ? 3 : 1,
+                zIndex: selected ? 1 : 0
             });
 
         };

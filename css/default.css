@@ -1,7 +1,13 @@
 html, body, #map-canvas {
+    font-family: Verdana, Arial;
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+/*http://www.colourlovers.com/palette/24741/a_cold_day*/
+h2, h3 {
+    color: #6EA9C3;
 }
 
 #map-canvas {
