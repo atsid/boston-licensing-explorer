@@ -3,7 +3,7 @@
 define([
     'jquery'
 ], function (
-    $
+    jQuery
 ) {
 
     return {
@@ -11,7 +11,7 @@ define([
         load: function (url, callback) {
 
             //census data is a tuple, with the first entry documenting the fields
-            $.ajax(url, {
+            jQuery.ajax(url, {
                 complete: function (data) {
                     var items = data.responseJSON,
                         keys = items.shift(),

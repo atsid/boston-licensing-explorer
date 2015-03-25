@@ -1,5 +1,6 @@
 define([
     'module',
+    'jquery',
     './map',
     './census',
     './features',
@@ -8,6 +9,7 @@ define([
     './stats'
 ], function (
     module,
+    jQuery,
     map,
     census,
     features,
@@ -40,12 +42,11 @@ define([
                 }
             );
 
-            var checks = document.getElementsByClassName('cb');
-            for (var i = 0; i < checks.length; i += 1) {
-                checks[i].addEventListener('change', function (e) {
-                    layers.displayLayer(e.target.id);
-                });
-            }
+            //hook up the checkbox changes to toggle layer display
+            jQuery('.cb').change(function (e) {
+                layers.displayLayer(e.target.id);
+            });
+
         }
     };
 

@@ -11,7 +11,7 @@ requirejs.config({
                 center: { lat: 42.3601, lng: -71.0589 },
                 zoom: 12
             },
-            element: 'map-canvas'
+            element: '#map-canvas'
         },
         'app/features': {
             //http://www.colourlovers.com/palette/84571/echo

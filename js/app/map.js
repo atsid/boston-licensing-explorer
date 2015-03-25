@@ -1,12 +1,14 @@
 //loads a google api map and makes it available to other modules via amd
 define([
-    'module'
+    'module',
+    'jquery'
 ], function (
-    module
+    module,
+    jQuery
 ) {
 
     var config = module.config(),
-        map = new google.maps.Map(document.getElementById(config.element), config.map);
+        map = new google.maps.Map(jQuery(config.element)[0], config.map);
 
     return map;
 

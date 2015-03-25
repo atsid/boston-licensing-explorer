@@ -1,9 +1,11 @@
 define([
     'module',
+    'jquery',
     './fields',
     './map'
 ], function (
     module,
+    jQuery,
     fields,
     map
 ) {
@@ -73,10 +75,10 @@ define([
                             id = feature.getId(),
                             item;
 
-                        document.getElementById('feature-details').innerHTML = feature.getProperty('description'); //TODO: this can now be crafted from direct attrs
+                        jQuery('#feature-details').html(feature.getProperty('description')); //TODO: this can now be crafted from direct attrs
 
                         if (data && (item = data[id])) {
-                            document.getElementById('data-details').innerHTML = fields.INCOME.label + ': $' + (fields.INCOME.get(item) || 0)  + '<br> ' + fields.POP.label + ': ' + fields.POP.get(item);
+                            jQuery('#data-details').html(fields.INCOME.label + ': $' + (fields.INCOME.get(item) || 0)  + '<br> ' + fields.POP.label + ': ' + fields.POP.get(item));
                         }
 
                         if (previous) {
