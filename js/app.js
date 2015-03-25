@@ -25,20 +25,27 @@
             var census = new atsid.Census();
             var stats = new atsid.Stats(['B19013_001E', 'B01003_001E']);
 
-            features.load('http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.geojson', function () {
+            census.load(
+                'http://api.census.gov/data/2013/acs5?get=B19013_001E,B01003_001E&for=tract:*&in=state:25+county:*',
+                function (data) {
+                    console.log('census hash', data);
 
-                census.load(
-                    'http://api.census.gov/data/2013/acs5?get=B19013_001E,B01003_001E&for=tract:*&in=state:25+county:*',
-                    function (data) {
-                        console.log('census hash', data);
-                        features.setData(data);
+                    features.setData(data);
+
+                    features.load('http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.geojson', function () {
+
                         stats.run(data);
                         Object.keys(fields).forEach(function (field) {
                             console.log('stats for ' + field, stats.stats[field]);
                         });
+
                     });
 
-            });
+
+
+                });
+
+
 
 
             var layers = new atsid.Layers(map);
