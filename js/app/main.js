@@ -1,9 +1,9 @@
 define([
-    './Census',
-    './Features',
-    './Fields',
-    './Layers',
-    './Stats'
+    './census',
+    './features',
+    './fields',
+    './layers',
+    './stats'
 ], function (
     census,
     features,
