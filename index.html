@@ -3,32 +3,38 @@
     <head>
         <link rel="stylesheet" type="text/css" href="css/default.css">
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-        <script type="text/javascript" src="js/app.js"></script>
     </head>
     <body>
         <div id="controls">
             <h3>Licenses</h3>
             <div class="checkboxes">
                 <span class="cb"><label>
-                    <input type="checkbox" onchange="displayLayer('license_food')">
+                    <input type="checkbox" id="license_food">
                     <img src="img/small_red.png" height="9" width="9">
                     Food
                 </label></span>
                 <span class="cb"><label>
-                    <input type="checkbox" onchange="displayLayer('license_liquor')">
+                    <input type="checkbox" id="license_liquor">
                     <img src="img/small_green.png" height="9" width="9">
                     Liquor
                 </label></span>
                 <span class="cb"><label>
-                    <input type="checkbox" onchange="displayLayer('license_entertainment')">
+                    <input type="checkbox" id="license_entertainment">
                     <img src="img/small_yellow.png" height="9" width="9">
                     Entertainment
                 </label></span>
             </div>
             <h3>Features</h3>
-            <div id="feature-details">
-            </div>
+            <div id="feature-details"></div>
         </div>
         <div id="map-canvas"></div>
+
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/Features.js"></script>
+    <script type="text/javascript" src="js/Layers.js"></script>
+    <script>
+        google.maps.event.addDomListener(window, 'load', atsid.app.initialize);
+    </script>
+
     </body>
 </html>
