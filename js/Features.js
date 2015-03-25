@@ -15,14 +15,15 @@
 
         this.renderer = function (feature) {
 
-            var selected = feature.getProperty('selected');
+            var selected = feature.getProperty('selected'),
+                hovered = feature.getProperty('hovered');
 
             return ({
-                fillOpacity: selected ? 0.7 : 0.5,
+                fillOpacity: (selected || hovered) ? 0.7 : 0.5,
                 fillColor: colors[Math.round(Math.random() * 5)], //totally random with each render right now
-                strokeColor: selected ? '#136EFB' : '#444',
-                strokeWeight: selected ? 3 : 1,
-                zIndex: selected ? 1 : 0
+                strokeColor: (selected || hovered) ? '#136EFB' : '#444',
+                strokeWeight: selected ? 3 : hovered ? 2 : 1,
+                zIndex: selected ? 2 : hovered ? 1 : 0
             });
 
         };
@@ -50,21 +51,32 @@
                     }
                 }
 
-                function mouseover (event) {
+                function mouseover () {
+                    var previous;
+                    return function (event) {
+                        var feature = event.feature,
+                            id = feature.getId(),
+                            item;
 
-                    var feature = event.feature,
-                        id = feature.getId(),
-                        item;
+                        document.getElementById('feature-details').innerHTML = feature.getProperty('description'); //TODO: this can now be crafted from direct attrs
 
-                    document.getElementById('feature-details').innerHTML = feature.getProperty('description'); //TODO: this can now be crafted from direct attrs
+                        if (data && (item = data[id])) {
+                            document.getElementById('data-details').innerHTML = 'Median Income : $' + (item['B19013_001E'] || 0)  + '<br> Total Population: ' + item['B01003_001E'];
+                        }
 
-                    if (data && (item = data[id])) {
-                        document.getElementById('data-details').innerHTML = 'Median Income : $' + (item['B19013_001E'] || 0)  + '<br> Total Population: ' + item['B01003_001E'];
+                        if (previous) {
+                            d.getFeatureById(previous).setProperty('hovered', false);
+                        }
+                        previous = id;
+                        feature.setProperty('hovered',true);
+
                     }
+
+
                 }
 
                 d.addListener('click', click().bind(this));
-                d.addListener('mouseover', mouseover.bind(this));
+                d.addListener('mouseover', mouseover().bind(this));
 
                 if (callback) {
                     callback.call(this);

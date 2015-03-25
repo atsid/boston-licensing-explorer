@@ -5,6 +5,7 @@
 
     scope.atsid.app = {
 
+
         initialize: function () {
 
             var boston = { lat: 42.3601, lng: -71.0589 };
@@ -12,12 +13,17 @@
                 center: boston,
                 zoom: 12
             };
+            var fields = {
+                'B19013_001E': 'Median Income',
+                'B01003_001E': 'Total Population'
+            };
 
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
             //load the features, then load the census data and pass it to the features for drilldown
             var features = new atsid.Features(map);
             var census = new atsid.Census();
+            var stats = new atsid.Stats(['B19013_001E', 'B01003_001E']);
 
             features.load('http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.geojson', function () {
 
@@ -26,6 +32,10 @@
                     function (data) {
                         console.log('census hash', data);
                         features.setData(data);
+                        stats.run(data);
+                        Object.keys(fields).forEach(function (field) {
+                            console.log('stats for ' + field, stats.stats[field]);
+                        });
                     });
 
             });
