@@ -8,9 +8,7 @@ var allTestFiles = [],
     };
 
 Object.keys(window.__karma__.files).forEach(function (file) {
-    console.log('file matcher: ' + file);
     if (/.*\.test\.js$/.test(file)) {
-        console.log('matched');
         // Normalize paths to RequireJS module names.
         allTestFiles.push(pathToModule(file));
     }
