@@ -6,6 +6,7 @@ define([
     './features',
     './fields',
     './layers',
+    './search',
     './stats'
 ], function (
     module,
@@ -15,6 +16,7 @@ define([
     features,
     fields,
     layers,
+    search,
     stats
 ) {
     return {
