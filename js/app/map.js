@@ -1,3 +1,5 @@
+"use strict";
+
 //loads a google api map and makes it available to other modules via amd
 define([
     'module',

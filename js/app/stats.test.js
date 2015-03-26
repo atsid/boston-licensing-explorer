@@ -1,4 +1,5 @@
 "use strict";
+
 requirejs.config({
     config: {
         'js/app/stats': {

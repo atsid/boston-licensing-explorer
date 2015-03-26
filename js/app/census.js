@@ -1,3 +1,5 @@
+"use strict";
+
 //methods for working with the US Census API
 //http://api.census.gov/data/2013/acs5/examples.html
 define([

@@ -1,3 +1,5 @@
+"use strict";
+
 //methods for working with keyed fields, so they can be referenced by enum-like values instead of
 //difficult-to-read census field headers
 define(['module'], function (module) {

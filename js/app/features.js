@@ -1,3 +1,5 @@
+"use strict";
+
 define([
     'module',
     'jquery',
@@ -71,7 +73,7 @@ define([
 
                 d.setStyle(this.renderer);
 
-                function click () {
+                function click() {
                     var previous;
                     return function (event) {
                         var feature = event.feature,
@@ -84,10 +86,10 @@ define([
                         }
                         previous = id;
                         feature.setProperty('selected', !selected);
-                    }
+                    };
                 }
 
-                function mouseover () {
+                function mouseover() {
                     var previous;
                     return function (event) {
                         var feature = event.feature,
@@ -99,8 +101,8 @@ define([
                             d.getFeatureById(previous).setProperty('hovered', false);
                         }
                         previous = id;
-                        feature.setProperty('hovered',true);
-                    }
+                        feature.setProperty('hovered', true);
+                    };
                 }
 
                 d.addListener('click', click().bind(this));

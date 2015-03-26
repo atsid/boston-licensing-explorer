@@ -1,3 +1,5 @@
+"use strict";
+
 //stats on data
 define([
     'module'
