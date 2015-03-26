@@ -1,0 +1,26 @@
+{
+    "boss":      true,
+    "node":      true,
+    "strict":    true,
+    "white":     true,
+    "smarttabs": true,
+    "maxlen":    1000,
+    "newcap":    false,
+    "undef":     true,
+    "unused":    false,
+    "onecase":   true,
+    "indent":    4,
+    "globals": {
+        "define": true,
+        "require": true,
+        "requirejs": true,
+        "it": true,
+        "describe": true,
+        "beforeEach": true,
+        "expect": true,
+        "before": true,
+        "afterEach": true,
+        "after": true,
+        "google": true
+    }
+}

@@ -43,6 +43,8 @@ define([
                 this.stats[key].avg = this.stats[key].sum / this.stats[key].count;
             }, this);
 
+            return this;
+
         }
 
     };
