@@ -11,6 +11,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+        'https://maps.googleapis.com/maps/api/js?libraries=places,geometry',
         'js/test.js',
         {pattern: 'js/app/**/*.js', included: false}
     ],

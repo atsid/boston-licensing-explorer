@@ -19,7 +19,8 @@ requirejs.config({
     baseUrl: '/base',
 
     paths: {
-        'app': '../app'
+        'app': '../app',
+        'jquery': 'http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min'
     },
 
     // ask Require.js to load these files (all our tests)
