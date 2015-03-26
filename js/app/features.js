@@ -57,7 +57,7 @@ define([
                 fillOpacity: (selected || hovered) ? 0.8 : 0.6,
                 fillColor: color,
                 strokeColor: (selected || hovered) ? '#136EFB' : '#444',
-                strokeWeight: selected ? 3 : hovered ? 2 : 1,
+                strokeWeight: selected ? 4 : hovered ? 2 : 1,
                 zIndex: selected ? 2 : hovered ? 1 : 0
             });
 
@@ -75,14 +75,15 @@ define([
                     var previous;
                     return function (event) {
                         var feature = event.feature,
-                            id = feature.getId();
+                            id = feature.getId(),
+                            selected = feature.getProperty('selected');
                         console.log(id + ' clicked');
                         console.log(feature);
                         if (previous) {
                             d.getFeatureById(previous).setProperty('selected', false);
                         }
                         previous = id;
-                        feature.setProperty('selected',true);
+                        feature.setProperty('selected', !selected);
                     }
                 }
 
