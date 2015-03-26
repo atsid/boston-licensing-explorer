@@ -33,6 +33,7 @@ h2, h3 {
 }
 
 .cb label {
+    color: #2B688E;
     cursor: pointer;
 }
 
@@ -48,8 +49,8 @@ h2, h3 {
 }
 
 .attrs-value {
-    border-left: 1px solid #eee;
     color: #2B688E;
+    border-left: 1px solid #eee;
     padding-left: 7px;
     text-align: left;
 }
