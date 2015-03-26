@@ -20,7 +20,7 @@ define([
             'license_food': {
                 type: 'geojson',
                 field: 'address',
-                url: 'data/food_small.geojson',
+                url: 'data/food.geojson',
                 template: 1,
                 style: 1
             },
