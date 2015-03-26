@@ -1,3 +1,5 @@
+"use strict";
+
 define([
     'module',
     'jquery',
@@ -49,7 +51,7 @@ define([
 
         d.setStyle(renderer);
 
-        function click () {
+        function click() {
             var previous;
             return function (event) {
                 var feature = event.feature,
@@ -62,10 +64,10 @@ define([
                 }
                 previous = id;
                 feature.setProperty('selected', !selected);
-            }
+            };
         }
 
-        function mouseover () {
+        function mouseover() {
             var previous;
             return function (event) {
                 var feature = event.feature,
@@ -77,8 +79,8 @@ define([
                     d.getFeatureById(previous).setProperty('hovered', false);
                 }
                 previous = id;
-                feature.setProperty('hovered',true);
-            }
+                feature.setProperty('hovered', true);
+            };
         }
 
         d.addListener('click', click().bind(this));
@@ -92,7 +94,7 @@ define([
                 feature.setProperty(field.field, d[field.key]);
             });
         });
-    }
+    };
     
     return {
 
@@ -116,8 +118,7 @@ define([
         },
 
         load: function (url, censusdata, callback) {
-            data = censusdata;
-            $.ajax({
+            jQuery.ajax({
                 'async' : true,
                 'global' : false,
                 'url' : url,
@@ -131,6 +132,7 @@ define([
                     }
                 }.bind(this)
             });
-    }};
+        }
+    };
 
 });

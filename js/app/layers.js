@@ -1,8 +1,10 @@
 "use strict";
 
 define([
+    'jquery',
     './map'
 ], function (
+    jQuery,
     map
 ) {
 
@@ -34,13 +36,13 @@ define([
     return {
 
         addLayer: function (url) {
-            $.ajax({
+            jQuery.ajax({
                 'async' : true,
                 'global' : false,
                 'url' : url,
                 'dataType': 'json',
                 'success': function (data) {
-                    $.ajax({
+                    jQuery.ajax({
                         url: 'http://geojsonlint.com/validate',
                         type: 'POST',
                         data: data,
