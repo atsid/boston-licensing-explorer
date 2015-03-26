@@ -39,3 +39,17 @@ h2, h3 {
 .cb img {
     margin: 2px 0px;
 }
+
+.attrs-key {
+    color: #B8D2DD;
+    text-align: right;
+    font-weight: bold;
+    padding-right: 7px;
+}
+
+.attrs-value {
+    border-left: 1px solid #eee;
+    color: #2B688E;
+    padding-left: 7px;
+    text-align: left;
+}
