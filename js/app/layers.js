@@ -9,29 +9,53 @@ define([
     var layers = {},
         tables = {
             'license_liquor' : {
-                type: 'fusion',
+                type: 'geojson',
                 field: 'address',
-                id: '1e0VQIZsvVlQIJzV_cyDhiN7LQC5J3Oxp-PXnd0AK',
+                url: 'data/liquor.geojson',
                 template: 2,
                 style: 2
             },
             'license_food': {
-                type: 'fusion',
+                type: 'geojson',
                 field: 'address',
-                id: '1XFIER_sMIIC1LqEfl9Rxt7XKy-eHR0pw_dSMDPSe',
+                url: 'data/food_small.geojson',
                 template: 1,
                 style: 1
             },
             'license_entertainment': {
-                type: 'fusion',
+                type: 'geojson',
                 field: 'address',
-                id: '1B3Vjkdd2zr9fmcn0vNjMlPlu6U6VkFYSFV3pMWmD',
+                url: 'data/entertainment.geojson',
                 template: 3,
                 style: 3
             }
         };
 
     return {
+
+        addLayer: function (url) {
+            $.ajax({
+                'async' : true,
+                'global' : false,
+                'url' : url,
+                'dataType': 'json',
+                'success': function (data) {
+                    $.ajax({
+                        url: 'http://geojsonlint.com/validate',
+                        type: 'POST',
+                        data: data,
+                        dataType: 'json',
+                        success: function (done) {
+                            console.log('lint ok ' + done);
+                            map.data.addGeoJson(data);
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+                }
+            });
+        },
 
         //creates a fusion layer, mapping into the config by name
         createLayer: function (name) {
@@ -53,6 +77,8 @@ define([
                     display: false
                 };
                 layers[name] = obj;
+            } else if (table.type === 'geojson') {
+                this.addLayer(table.url);
             }
 
             return obj;
@@ -64,14 +90,6 @@ define([
 
             if (!layer) {
                 layer = this.createLayer(name);
-            }
-
-            if (layer.display) {
-                layer.display = false;
-                layer.layer.setMap(null);
-            } else {
-                layer.display = true;
-                layer.layer.setMap(map);
             }
         }
 

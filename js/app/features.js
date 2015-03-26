@@ -1,5 +1,3 @@
-"use strict";
-
 define([
     'module',
     'jquery',
@@ -45,6 +43,56 @@ define([
         });
         return index;
     };
+
+    var applyBindings = function (geodata, censusdata, map, renderer) {
+        var d = map.data;
+
+        d.setStyle(renderer);
+
+        function click () {
+            var previous;
+            return function (event) {
+                var feature = event.feature,
+                    id = feature.getId(),
+                    selected = feature.getProperty('selected');
+                console.log(id + ' clicked');
+                console.log(feature);
+                if (previous) {
+                    d.getFeatureById(previous).setProperty('selected', false);
+                }
+                previous = id;
+                feature.setProperty('selected', !selected);
+            }
+        }
+
+        function mouseover () {
+            var previous;
+            return function (event) {
+                var feature = event.feature,
+                    id = feature.getId();
+
+                new Table(feature, attributeTableConfig).renderTo('#feature-details');
+
+                if (previous) {
+                    d.getFeatureById(previous).setProperty('hovered', false);
+                }
+                previous = id;
+                feature.setProperty('hovered',true);
+            }
+        }
+
+        d.addListener('click', click().bind(this));
+        d.addListener('mouseover', mouseover().bind(this));
+
+        //map our data hash values into the features
+        d.forEach(function (feature) {
+            var id = feature.getId(),
+                d = censusdata[id];
+            fields.forEach(function (field) {
+                feature.setProperty(field.field, d[field.key]);
+            });
+        });
+    }
     
     return {
 
@@ -54,6 +102,8 @@ define([
                 income = feature.getProperty('INCOME'),
                 bin = findIncomeBin(income),
                 color = colors[bin] || '#999';
+
+            console.log('rendering');
 
             return ({
                 fillOpacity: (selected || hovered) ? 0.8 : 0.6,
@@ -65,66 +115,22 @@ define([
 
         },
 
-        load: function (url, data, callback) {
-
-            map.data.loadGeoJson(url, opts, function () {
-
-                var d = map.data;
-
-                d.setStyle(this.renderer);
-
-                function click() {
-                    var previous;
-                    return function (event) {
-                        var feature = event.feature,
-                            id = feature.getId(),
-                            selected = feature.getProperty('selected');
-                        console.log(id + ' clicked');
-                        console.log(feature);
-                        if (previous) {
-                            d.getFeatureById(previous).setProperty('selected', false);
-                        }
-                        previous = id;
-                        feature.setProperty('selected', !selected);
-                    };
-                }
-
-                function mouseover() {
-                    var previous;
-                    return function (event) {
-                        var feature = event.feature,
-                            id = feature.getId();
-
-                        new Table(feature, attributeTableConfig).renderTo('#feature-details');
-
-                        if (previous) {
-                            d.getFeatureById(previous).setProperty('hovered', false);
-                        }
-                        previous = id;
-                        feature.setProperty('hovered', true);
-                    };
-                }
-
-                d.addListener('click', click().bind(this));
-                d.addListener('mouseover', mouseover().bind(this));
-
-                //map our data hash values into the features
-                d.forEach(function (feature) {
-                    var id = feature.getId(),
-                        d = data[id];
-                    fields.forEach(function (field) {
-                        feature.setProperty(field.field, d[field.key]);
-                    });
-                });
-
-                if (callback) {
-                    callback.call(this);
-                }
-
-            }.bind(this));
-
-        }
-
-    };
+        load: function (url, censusdata, callback) {
+            data = censusdata;
+            $.ajax({
+                'async' : true,
+                'global' : false,
+                'url' : url,
+                'dataType': 'json',
+                'success': function (geodata) {
+                    map.data.addGeoJson(geodata, opts);
+                    console.log(this.renderer);
+                    applyBindings(geodata, censusdata, map, this.renderer);
+                    if (callback) {
+                        callback.call(this);
+                    }
+                }.bind(this)
+            });
+    }};
 
 });
