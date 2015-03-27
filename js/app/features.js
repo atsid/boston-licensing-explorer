@@ -19,12 +19,6 @@ define([
     var config = module.config(),
         opts = config.opts,
         attributeTableConfig = [{
-            key: 'GEOID',
-            label: 'GEOID'
-        }, {
-            key: 'ALAND',
-            label: 'Area (m<sup>2</sup>)'
-        }, {
             key: 'INCOME',
             label: 'Median Income',
             formatter: function (data) {
@@ -33,9 +27,15 @@ define([
         }, {
             key: 'POP',
             label: 'Population'
+        }, {
+            key: 'ALAND',
+            label: 'Area (m<sup>2</sup>)'
+        }, {
+            key: 'GEOID',
+            label: 'GEOID'
         }];
 
-    var applyBindings = function (geodata, censusdata, map, renderer) {
+    var applyBindings = function (geodata, censusdata, renderer) {
         var d = map.data;
 
         d.setStyle(renderer);
@@ -110,7 +110,7 @@ define([
                 'success': function (geodata) {
                     map.data.addGeoJson(geodata, opts);
                     console.log(this.renderer);
-                    applyBindings(geodata, censusdata, map, this.renderer);
+                    applyBindings(geodata, censusdata, this.renderer);
                     if (callback) {
                         callback.call(this);
                     }
