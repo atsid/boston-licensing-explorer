@@ -13,7 +13,7 @@ define([
 ) {
 
     var config = module.config,
-        baseUrl = 'data/',
+        baseUrl = 'http://labs.atsid.com/hubhacks2/data/',
         layers = {},
         tables = {
             'license_liquor' : {
