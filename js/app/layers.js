@@ -11,26 +11,27 @@ define([
 ) {
 
     var config = module.config,
+        baseUrl = 'http://labs.atsid.com/hubhacks2/',
         layers = {},
         tables = {
             'license_liquor' : {
                 type: 'geojson',
                 field: 'address',
-                url: 'data/liquor.geojson',
+                url: baseUrl + 'data/liquor.geojson',
                 template: 2,
                 style: 2
             },
             'license_food': {
                 type: 'geojson',
                 field: 'address',
-                url: 'data/food.geojson',
+                url: baseUrl + 'data/food.geojson',
                 template: 1,
                 style: 1
             },
             'license_entertainment': {
                 type: 'geojson',
                 field: 'address',
-                url: 'data/entertainment.geojson',
+                url: baseUrl + 'data/entertainment.geojson',
                 template: 3,
                 style: 3
             }
