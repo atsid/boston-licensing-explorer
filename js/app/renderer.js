@@ -5,7 +5,7 @@ define([
 ) {
     var renderers = {};
 
-    for(var i = 0; i < arguments.length; i++) {
+    for (var i = 0; i < arguments.length; i++) {
         renderers[arguments[i].name] = arguments[i].renderer;
     }
 
