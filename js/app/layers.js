@@ -1,14 +1,17 @@
 "use strict";
 
 define([
+    'module',
     'jquery',
     './map'
 ], function (
+    module,
     jQuery,
     map
 ) {
 
-    var layers = {},
+    var config = module.config,
+        layers = {},
         tables = {
             'license_liquor' : {
                 type: 'geojson',
@@ -31,59 +34,50 @@ define([
                 template: 3,
                 style: 3
             }
+        },
+        addFeaturesAsLayers = function (key, features) {
+            layers[key] = features;
         };
 
     return {
 
-        addLayer: function (url) {
+        addLayer: function (url, name, callback) {
             jQuery.ajax({
                 'async' : true,
                 'global' : false,
                 'url' : url,
                 'dataType': 'json',
                 'success': function (data) {
-                    jQuery.ajax({
-                        url: 'http://geojsonlint.com/validate',
-                        type: 'POST',
-                        data: data,
-                        dataType: 'json',
-                        success: function (done) {
-                            console.log('lint ok ' + done);
-                            map.data.addGeoJson(data);
-                        },
-                        error: function (err) {
-                            console.log(err);
+                    if (config.validate) {
+                        jQuery.ajax({
+                            url: 'http://geojsonlint.com/validate',
+                            type: 'POST',
+                            data: data,
+                            dataType: 'json',
+                            success: function (done) {
+                                var features = map.data.addGeoJson(data);
+                                if (callback) {
+                                    callback(name, features);
+                                }
+                            }
+                        });
+                    } else {
+                        var features = map.data.addGeoJson(data);
+                        if (callback) {
+                            callback(name, features);
                         }
-                    });
+                    }
                 }
             });
         },
 
         //creates a fusion layer, mapping into the config by name
         createLayer: function (name) {
-            var table, layer, obj;
+            var table = tables[name];
 
-            table = tables[name];
-
-            if (table.type === 'fusion') {
-                layer = new google.maps.FusionTablesLayer({
-                    query: {
-                        select: table.field,
-                        from: table.id
-                    },
-                    templateId: table.template,
-                    styleId: table.style
-                });
-                obj = {
-                    layer: layer,
-                    display: false
-                };
-                layers[name] = obj;
-            } else if (table.type === 'geojson') {
-                this.addLayer(table.url);
+            if (table.type === 'geojson') {
+                this.addLayer(table.url, name, addFeaturesAsLayers);
             }
-
-            return obj;
         },
 
         //displays a specified layer
@@ -91,7 +85,9 @@ define([
             var layer = layers[name];
 
             if (!layer) {
-                layer = this.createLayer(name);
+                this.createLayer(name);
+            } else {
+
             }
         }
 

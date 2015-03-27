@@ -15,11 +15,13 @@ requirejs.config({
             },
             element: '#map-canvas'
         },
-        'app/features': {
+        'app/renderers/census_renderer': {
             //http://www.colourlovers.com/palette/84571/echo
             colors: ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D'],
             //this is pretty arbitrary, but ramps up to capture a little more granularity in the more common < 100k bins
             income_bins: [20000, 60000, 80000, 100000, 150000],
+        },
+        'app/features': {
             //these are the geojson opts used for maps api loadGeoJson
             opts: { idPropertyName: 'GEOID' }
         },
@@ -36,6 +38,9 @@ requirejs.config({
         },
         'app/stats': {
             keys: ['B19013_001E', 'B01003_001E']
+        },
+        'app/layers': {
+            validate: false
         }
     }
 });

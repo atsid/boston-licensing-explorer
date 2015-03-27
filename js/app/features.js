@@ -5,18 +5,18 @@ define([
     'jquery',
     './fields',
     './map',
-    './Table'
+    './Table',
+    './renderer'
 ], function (
     module,
     jQuery,
     fields,
     map,
-    Table
+    Table,
+    renderers
 ) {
 
     var config = module.config(),
-        colors = config.colors,
-        income_bins = config.income_bins,
         opts = config.opts,
         attributeTableConfig = [{
             key: 'GEOID',
@@ -34,17 +34,6 @@ define([
             key: 'POP',
             label: 'Population'
         }];
-
-    var findIncomeBin = function (income) {
-        var index = income_bins.length - 1;
-        income_bins.some(function (bin, idx) {
-            if (income < bin) {
-                index = idx;
-                return true;
-            }
-        });
-        return index;
-    };
 
     var applyBindings = function (geodata, censusdata, map, renderer) {
         var d = map.data;
@@ -99,22 +88,17 @@ define([
     return {
 
         renderer: function (feature) {
-            var selected = feature.getProperty('selected'),
-                hovered = feature.getProperty('hovered'),
-                income = feature.getProperty('INCOME'),
-                bin = findIncomeBin(income),
-                color = colors[bin] || '#999';
+            var layer_name = feature.getProperty('layer'),
+                renderer;
+            if (layer_name) {
+                renderer = renderers.getRenderer(layer_name);
+            }
 
-            console.log('rendering');
-
-            return ({
-                fillOpacity: (selected || hovered) ? 0.8 : 0.6,
-                fillColor: color,
-                strokeColor: (selected || hovered) ? '#136EFB' : '#444',
-                strokeWeight: selected ? 4 : hovered ? 2 : 1,
-                zIndex: selected ? 2 : hovered ? 1 : 0
-            });
-
+            if (renderer) {
+                return renderer(feature);
+            } else {
+                return renderers.getRenderer('layer_census')(feature);
+            }
         },
 
         load: function (url, censusdata, callback) {
