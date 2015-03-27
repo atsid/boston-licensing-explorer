@@ -6,7 +6,6 @@ define([
     './fields',
     './map',
     './Table',
-    './renderer',
     './layers'
 ], function (
     module,
@@ -14,28 +13,11 @@ define([
     fields,
     map,
     Table,
-    renderers,
     layers
 ) {
 
     var config = module.config(),
-        opts = config.opts,
-        attributeTableConfig = [{
-            key: 'INCOME',
-            label: 'Median Income',
-            formatter: function (data) {
-                return '$' + (data || '0');
-            }
-        }, {
-            key: 'POP',
-            label: 'Population'
-        }, {
-            key: 'ALAND',
-            label: 'Area (m<sup>2</sup>)'
-        }, {
-            key: 'GEOID',
-            label: 'GEOID'
-        }];
+        opts = config.opts;
 
     var applyBindings = function (geodata, censusdata, renderer) {
         var d = map.data;
@@ -58,13 +40,23 @@ define([
             };
         }
 
+        function getAttributeTableConfig(feature) {
+            var layerName = feature.getProperty('layer');
+
+            if (layerName) {
+                return layers.getAttributeTableConfig(layerName);
+            } else {
+                return layers.getAttributeTableConfig('layer_census');
+            }
+        }
+
         function mouseover() {
             var previous;
             return function (event) {
                 var feature = event.feature,
                     id = feature.getId();
 
-                new Table(feature, attributeTableConfig).renderTo('#feature-details');
+                new Table(feature, getAttributeTableConfig).renderTo('#feature-details');
 
                 if (previous) {
                     d.getFeatureById(previous).setProperty('hovered', false);
@@ -94,15 +86,16 @@ define([
                 renderer;
 
             if (layer_name) {
-                renderer = renderers.getRenderer(layer_name);
+                renderer = layers.getRenderer(layer_name);
             }
 
             if (renderer) {
                 return renderer(feature);
             } else {
-                return renderers.getRenderer('layer_census')(feature);
+                return layers.getRenderer('layer_census')(feature);
             }
         },
+
         load: function (censusdata, callback) {
             var cb = function (geodata) {
                     applyBindings(geodata, censusdata, this.renderer);

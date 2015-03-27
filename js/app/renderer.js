@@ -6,16 +6,20 @@ define([
     './renderers/license_entertainment_renderer'
 ], function (
 ) {
-    var renderers = {};
+    var renderers = {},
+        attributeTableConfigs = {};
 
     for (var i = 0; i < arguments.length; i++) {
-        console.log('adding renderer with name: ' + arguments[i].name);
         renderers[arguments[i].name] = arguments[i].renderer;
+        attributeTableConfigs[arguments[i].name] = arguments[i].attributeTableConfig;
     }
 
     return {
         getRenderer: function (name) {
             return renderers[name];
+        },
+        getAttributeTableConfig: function (name) {
+            return attributeTableConfigs[name];
         }
     };
 });

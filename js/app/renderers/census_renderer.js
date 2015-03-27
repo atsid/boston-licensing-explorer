@@ -34,6 +34,22 @@ define([
                 zIndex: selected ? 2 : hovered ? 1 : 0
             });
         },
+        attributeTableConfig: [{
+            key: 'INCOME',
+            label: 'Median Income',
+            formatter: function (data) {
+                return '$' + (data || '0');
+            }
+        }, {
+            key: 'POP',
+            label: 'Population'
+        }, {
+            key: 'ALAND',
+            label: 'Area (m<sup>2</sup>)'
+        }, {
+            key: 'GEOID',
+            label: 'GEOID'
+        }],
         name: 'layer_census'
     };
 });

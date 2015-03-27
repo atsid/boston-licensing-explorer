@@ -10,10 +10,11 @@ define([
     //TODO: pull in something with real templating
     //attributes should have a key that represents the property name within the feature, and a label
     //a formatter may optionally be provided for the value as well
-    var Table = function (feature, attributes) {
+    var Table = function (feature, attributeLoader) {
 
         var html = '<table class="attrs-table">',
-            row = '<tr class="attrs-tr"><td class="attrs-td attrs-key">{key}</td><td class="attrs-td attrs-value">{value}</td></tr>';
+            row = '<tr class="attrs-tr"><td class="attrs-td attrs-key">{key}</td><td class="attrs-td attrs-value">{value}</td></tr>',
+            attributes = attributeLoader(feature);
 
         attributes.forEach(function (attribute) {
             var data = feature.getProperty(attribute.key),

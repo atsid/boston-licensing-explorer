@@ -3,11 +3,13 @@
 define([
     'module',
     'jquery',
-    './map'
+    './map',
+    './renderer'
 ], function (
     module,
     jQuery,
-    map
+    map,
+    renderer
 ) {
 
     var config = module.config,
@@ -122,6 +124,14 @@ define([
             } else {
                 callback(layer);
             }
+        },
+
+        getRenderer: function (name) {
+            return renderer.getRenderer(name);
+        },
+
+        getAttributeTableConfig: function (name) {
+            return renderer.getAttributeTableConfig(name);
         }
 
     };
