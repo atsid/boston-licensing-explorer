@@ -1,7 +1,7 @@
 "use strict";
 define([
     'module'
-], function(
+], function (
     module
 ) {
     var config = module.config(),
@@ -18,7 +18,7 @@ define([
         colors = config.colors,
         income_bins = config.income_bins;
 
-        return {
+    return {
         renderer: function (feature) {
             var selected = feature.getProperty('selected'),
                 hovered = feature.getProperty('hovered'),
