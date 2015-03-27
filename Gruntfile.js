@@ -20,14 +20,25 @@ module.exports = function (grunt) {
                 files: ['**/*.js', '!**/node_modules/**'],
                 tasks: ['lint', 'test']
             }
+        },
+        connect: {
+            server: {
+                options: {
+                    port: 9001,
+                    base: '',
+                    keepalive: true
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('test', ['karma']);
+    grunt.registerTask('server', ['connect']);
     grunt.registerTask('default', ['lint', 'test']);
 
 };
