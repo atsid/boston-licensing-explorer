@@ -10,8 +10,8 @@ define({
 
     /**
      * Calculates a bounding box for a google.maps.Polygon
-     * TODO: return a LtLngBounds to be directly google api compatible
      * @param polygon
+     * @returns google.maps.LatLngBounds representing the minimum bounding rectangle
      */
     bounds: function (polygon) {
         var minx = 180, maxx = -180, miny = 90, maxy = -90;
@@ -23,12 +23,12 @@ define({
             miny = Math.min(miny, lat);
             maxy = Math.max(maxy, lat);
         });
-        return {
-            minx: minx,
-            maxx: maxx,
-            miny: miny,
-            maxy: maxy
-        };
+
+        return new google.maps.LatLngBounds(
+            new google.maps.LatLng(minx, miny),
+            new google.maps.LatLng(maxx, maxy)
+        );
+
     },
 
     /**
@@ -83,7 +83,7 @@ define({
 
                 bounds = getBounds(poly);
 
-                index = findMinIndex(points, bounds.minx);
+                index = findMinIndex(points, bounds.getSouthWest().lng());
 
                 for (i = index; i < points.length; i += 1) {
 
@@ -99,7 +99,7 @@ define({
 
                         if (contained) {
                             count += 1;
-                        } else if (lng > bounds.maxx) {
+                        } else if (lng > bounds.getNorthEast().lng()) {
                             break;
                         }
 
@@ -122,7 +122,7 @@ define({
         });
 
         console.log('successful polygons ' + polyCount);
-        console.log('comparisons: ' + comparisonCount);
+        console.log('comparisons: ' + comparisonCount + ' (out of ' + (polygons.length * points.length) + ' brute force)');
         console.log('spatial join: ' + (Date.now() - start) + 'ms');
 
     }
