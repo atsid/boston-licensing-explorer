@@ -38,18 +38,19 @@ define([
         },
         addFeaturesAsLayers = function (key, features) {
             layers[key] = features;
-            layers['hidden_'+key] = false;
+            layers['hidden_' + key] = false;
         },
         toggleHidden = function (name) {
-            var hidden = layers['hidden_' + name];
+            var hidden = layers['hidden_' + name],
+                i = 0;
             if (hidden) {
                 layers['hidden_' + name] = false;
-                for(var i = 0; i < layers[name].length; i++) {
+                for (i = 0; i < layers[name].length; i++) {
                     map.data.add(layers[name][i]);
                 }
             } else {
                 layers['hidden_' + name] = true;
-                for(var i = 0; i < layers[name].length; i++) {
+                for (i = 0; i < layers[name].length; i++) {
                     map.data.remove(layers[name][i]);
                 }
             }
