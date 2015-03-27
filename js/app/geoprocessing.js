@@ -25,9 +25,39 @@ define({
         });
 
         return new google.maps.LatLngBounds(
-            new google.maps.LatLng(minx, miny),
-            new google.maps.LatLng(maxx, maxy)
+            new google.maps.LatLng(miny, minx),
+            new google.maps.LatLng(maxy, maxx)
         );
+
+    },
+
+    //finds minimum index in an array of sorted points that meets the specified long.
+    //performs a modified binary search that accounts for non-exact match of longs.
+    minimumLngIndex: function (points, bounds) {
+
+        var min = 0,
+            max = points.length - 1,
+            lng = bounds.getSouthWest().lng(),
+            index,
+            plng;
+
+        while (min <= max) {
+            index = Math.floor((min + max) / 2);
+            plng = points[index].getGeometry().get().lng();
+            if (plng < lng) {
+                min = index + 1;
+            } else if (plng >= lng) {
+                if (index === 0) {
+                    return index;
+                } else if (points[index - 1].getGeometry().get().lng() > lng) {
+                    max = index - 1;
+                } else {
+                    return index;
+                }
+            }
+        }
+
+        return 0;
 
     },
 
@@ -42,6 +72,7 @@ define({
 
         var start = Date.now(),
             getBounds = this.bounds,
+            getMinX = this.minimumLngIndex,
             polyCount = 0,
             comparisonCount = 0;
 
@@ -51,17 +82,6 @@ define({
         points.sort(function (p1, p2) {
             return p1.getGeometry().get().lng() - p2.getGeometry().get().lng();
         });
-
-        //finds first index greater than lng
-        function findMinIndex(points, lng) {
-            //TODO: replace this with a binary search
-            for (var i = 0; i < points.length; i += 1) {
-                if (points[i].getGeometry().get().lng() >= lng) {
-                    return i;
-                }
-            }
-            return 0;
-        }
 
         polygons.forEach(function (polygon) {
 
@@ -82,8 +102,7 @@ define({
                     });
 
                 bounds = getBounds(poly);
-
-                index = findMinIndex(points, bounds.getSouthWest().lng());
+                index = getMinX(points, bounds);
 
                 for (i = index; i < points.length; i += 1) {
 
