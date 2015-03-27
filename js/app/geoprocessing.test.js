@@ -1,5 +1,7 @@
 "use strict";
 
+/*jslint browser:true */
+
 requirejs.config({
     config: {
         'js/app/map': {
