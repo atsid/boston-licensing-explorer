@@ -36,7 +36,7 @@ define([
 
             //load the census data first, then pass it into the feature manager so it is ready for when the feature data returns
             census.load(
-                'http://api.census.gov/data/2013/acs5?get=' + fields.getKeys().join(',') + '&for=tract:*&in=state:25+county:*',
+                config.census_url,
                 function (data) {
 
                     console.log('census hash', data);

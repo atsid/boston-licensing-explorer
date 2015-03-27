@@ -2,6 +2,9 @@
 
 //methods for working with keyed fields, so they can be referenced by enum-like values instead of
 //difficult-to-read census field headers
+//NOTE: this doesn't just support census-mapped fields now - if also supports arbitrary calculated fields
+//TODO: support explicit ordering of fields, since some of them have calculations that are dependent on previous
+//fields being set in the feature
 define(['module'], function (module) {
 
     var config = module.config(),

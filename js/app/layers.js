@@ -12,36 +12,10 @@ define([
     renderer
 ) {
 
-    var config = module.config,
-        baseUrl = 'http://labs.atsid.com/hubhacks2/data/',
+    var config = module.config(),
+        linterUrl = config.linterUrl,
+        tables = config.tables,
         layers = {},
-        tables = {
-            'license_liquor' : {
-                type: 'geojson',
-                field: 'address',
-                url: baseUrl + 'liquor.geojson',
-                template: 2,
-                style: 2
-            },
-            'license_food': {
-                type: 'geojson',
-                field: 'address',
-                url: baseUrl + 'food.geojson',
-                template: 1,
-                style: 1
-            },
-            'license_entertainment': {
-                type: 'geojson',
-                field: 'address',
-                url: baseUrl + 'entertainment.geojson',
-                template: 3,
-                style: 3
-            },
-            'census_geography': {
-                type: 'geojson',
-                url: baseUrl + 'cb_2013_25_tract_500k.geojson'
-            }
-        },
         addFeaturesAsLayers = function (key, features) {
             layers[key] = features;
             layers['hidden_' + key] = false;
@@ -75,7 +49,7 @@ define([
                 'success': function (data) {
                     if (config.validate) {
                         jQuery.ajax({
-                            url: 'http://geojsonlint.com/validate',
+                            url: linterUrl,
                             type: 'POST',
                             data: data,
                             dataType: 'json',

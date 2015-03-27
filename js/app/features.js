@@ -72,9 +72,12 @@ define([
         //map our data hash values into the features
         d.forEach(function (feature) {
             var id = feature.getId();
-
             fields.forEach(function (field) {
-                feature.setProperty(field.field, censusdata[id][field.key]);
+                if (field.key) {
+                    feature.setProperty(field.field, censusdata[id][field.key]);
+                } else if (field.calc) {
+                    feature.setProperty(field.field, field.calc.call(field, feature));
+                }
             });
         });
     };

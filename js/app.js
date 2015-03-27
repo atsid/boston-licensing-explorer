@@ -1,5 +1,7 @@
 "use strict";
 
+var baseDataUrl = 'http://labs.atsid.com/hubhacks2/data/';
+
 requirejs.config({
     'baseUrl': 'js/lib',
     'paths': {
@@ -9,6 +11,7 @@ requirejs.config({
     },
     'config': {
         'app/main': {
+            census_url: 'http://api.census.gov/data/2013/acs5?get=B19013_001E,B01003_001E&for=tract:*&in=state:25+county:*',
             colors: ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D', '#4F5C4B'],
             color_labels: ['&lt;$20,000', '$20,000 - $60,000', '$60,000 - $80,000', '$80,000 - $100,000', '$100,000 - $150,000', '&gt;$150,000']
         },
@@ -33,19 +36,55 @@ requirejs.config({
         //field codes documented here: http://www2.census.gov/geo/tiger/TIGER_DP/2013ACS/Metadata/County_and_Place_Metadata_2013.txt
         'app/fields': {
             INCOME: {
-                key: 'B19013_001E',
-                label: 'Median Income'
+                key: 'B19013_001E'
             },
             POP: {
-                key: 'B01003_001E',
-                label: 'Total Population'
+                key: 'B01003_001E'
+            },
+            SQ_MILE: {
+                calc: function (feature) {
+                    return (feature.getProperty('ALAND') * (3.86102e-7)).toFixed(3);
+                }
+            },
+            DENSITY: {
+                calc: function (feature) {
+                    return Math.round(feature.getProperty('POP') / feature.getProperty('SQ_MILE'));
+                }
             }
         },
         'app/stats': {
             keys: ['B19013_001E', 'B01003_001E']
         },
         'app/layers': {
-            validate: false
+            linterUrl: 'http://geojsonlint.com/validate',
+            validate: false,
+            tables: {
+                'license_liquor' : {
+                    type: 'geojson',
+                    field: 'address',
+                    url: baseDataUrl + 'liquor.geojson',
+                    template: 2,
+                    style: 2
+                },
+                'license_food': {
+                    type: 'geojson',
+                    field: 'address',
+                    url: baseDataUrl + 'food.geojson',
+                    template: 1,
+                    style: 1
+                },
+                'license_entertainment': {
+                    type: 'geojson',
+                    field: 'address',
+                    url: baseDataUrl + 'entertainment.geojson',
+                    template: 3,
+                    style: 3
+                },
+                'census_geography': {
+                    type: 'geojson',
+                    url: baseDataUrl + 'cb_2013_25_tract_500k.geojson'
+                }
+            }
         }
     }
 });

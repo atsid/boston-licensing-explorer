@@ -47,8 +47,11 @@ define([
             key: 'POP',
             label: 'Population'
         }, {
-            key: 'ALAND',
-            label: 'Area (m<sup>2</sup>)'
+            key: 'DENSITY',
+            label: 'Pop. Density'
+        }, {
+            key: 'SQ_MILE',
+            label: 'Area (mi<sup>2</sup>)'
         }, {
             key: 'GEOID',
             label: 'GEOID'
