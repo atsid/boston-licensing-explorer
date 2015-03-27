@@ -63,10 +63,25 @@ h2, h3 {
 .logos_bottom {
     width: 300px;
     position: absolute;
-    bottom: 0;
+    bottom: 8px;
     padding-top: 5px;
-    margin-bottom: 10px;
     border-top: 1px gray solid;
+}
+
+.nav {
+    position: absolute;
+    bottom: 70px;
+    width: 300px;
+    height: 24px;
+    padding-top: 4px;
+    background-color: rgb(152, 202, 232);
+    color: black;
+    font-family: ProximaNova, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+.nav span {
+    cursor: pointer;
 }
 
 .search_control {

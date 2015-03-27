@@ -4,6 +4,7 @@ define([
     'module',
     'jquery',
     './map',
+    './about',
     './census',
     './features',
     './fields',
@@ -13,6 +14,7 @@ define([
 ], function (
     module,
     jQuery,
+    about,
     map,
     census,
     features,
