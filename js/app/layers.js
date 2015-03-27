@@ -1,61 +1,83 @@
 "use strict";
 
 define([
+    'module',
+    'jquery',
     './map'
 ], function (
+    module,
+    jQuery,
     map
 ) {
 
-    var layers = {},
+    var config = module.config,
+        layers = {},
         tables = {
             'license_liquor' : {
-                type: 'fusion',
+                type: 'geojson',
                 field: 'address',
-                id: '1e0VQIZsvVlQIJzV_cyDhiN7LQC5J3Oxp-PXnd0AK',
+                url: 'data/liquor.geojson',
                 template: 2,
                 style: 2
             },
             'license_food': {
-                type: 'fusion',
+                type: 'geojson',
                 field: 'address',
-                id: '1XFIER_sMIIC1LqEfl9Rxt7XKy-eHR0pw_dSMDPSe',
+                url: 'data/food.geojson',
                 template: 1,
                 style: 1
             },
             'license_entertainment': {
-                type: 'fusion',
+                type: 'geojson',
                 field: 'address',
-                id: '1B3Vjkdd2zr9fmcn0vNjMlPlu6U6VkFYSFV3pMWmD',
+                url: 'data/entertainment.geojson',
                 template: 3,
                 style: 3
             }
+        },
+        addFeaturesAsLayers = function (key, features) {
+            layers[key] = features;
         };
 
     return {
 
+        addLayer: function (url, name, callback) {
+            jQuery.ajax({
+                'async' : true,
+                'global' : false,
+                'url' : url,
+                'dataType': 'json',
+                'success': function (data) {
+                    if (config.validate) {
+                        jQuery.ajax({
+                            url: 'http://geojsonlint.com/validate',
+                            type: 'POST',
+                            data: data,
+                            dataType: 'json',
+                            success: function (done) {
+                                var features = map.data.addGeoJson(data);
+                                if (callback) {
+                                    callback(name, features);
+                                }
+                            }
+                        });
+                    } else {
+                        var features = map.data.addGeoJson(data);
+                        if (callback) {
+                            callback(name, features);
+                        }
+                    }
+                }
+            });
+        },
+
         //creates a fusion layer, mapping into the config by name
         createLayer: function (name) {
-            var table, layer, obj;
+            var table = tables[name];
 
-            table = tables[name];
-
-            if (table.type === 'fusion') {
-                layer = new google.maps.FusionTablesLayer({
-                    query: {
-                        select: table.field,
-                        from: table.id
-                    },
-                    templateId: table.template,
-                    styleId: table.style
-                });
-                obj = {
-                    layer: layer,
-                    display: false
-                };
-                layers[name] = obj;
+            if (table.type === 'geojson') {
+                this.addLayer(table.url, name, addFeaturesAsLayers);
             }
-
-            return obj;
         },
 
         //displays a specified layer
@@ -63,15 +85,9 @@ define([
             var layer = layers[name];
 
             if (!layer) {
-                layer = this.createLayer(name);
-            }
-
-            if (layer.display) {
-                layer.display = false;
-                layer.layer.setMap(null);
+                this.createLayer(name);
             } else {
-                layer.display = true;
-                layer.layer.setMap(map);
+
             }
         }
 
