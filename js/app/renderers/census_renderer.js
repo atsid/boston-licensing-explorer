@@ -35,6 +35,9 @@ define([
             });
         },
         attributeTableConfig: [{
+            label: 'Type ',
+            value: 'Census Tract'
+        }, {
             key: 'INCOME',
             label: 'Median Income',
             formatter: function (data) {

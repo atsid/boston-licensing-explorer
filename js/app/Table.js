@@ -6,6 +6,14 @@ define([
     jQuery
 ) {
 
+    var getValueForAttribute = function (feature, attribute) {
+        if (attribute.key) {
+            return feature.getProperty(attribute.key);
+        } else {
+            return attribute.value;
+        }
+    }
+
     //creates a new DOM table using specified attrs from a map feature
     //TODO: pull in something with real templating
     //attributes should have a key that represents the property name within the feature, and a label
@@ -17,7 +25,7 @@ define([
             attributes = attributeLoader(feature);
 
         attributes.forEach(function (attribute) {
-            var data = feature.getProperty(attribute.key),
+            var data = getValueForAttribute(feature, attribute),
                 display = attribute.formatter ? attribute.formatter(data) : data;
             html += row.replace('{key}', attribute.label).replace('{value}', display);
         });
