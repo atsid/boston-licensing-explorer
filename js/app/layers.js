@@ -11,29 +11,33 @@ define([
 ) {
 
     var config = module.config,
-        baseUrl = 'http://labs.atsid.com/hubhacks2/',
+        baseUrl = 'http://labs.atsid.com/hubhacks2/data/',
         layers = {},
         tables = {
             'license_liquor' : {
                 type: 'geojson',
                 field: 'address',
-                url: baseUrl + 'data/liquor.geojson',
+                url: baseUrl + 'liquor.geojson',
                 template: 2,
                 style: 2
             },
             'license_food': {
                 type: 'geojson',
                 field: 'address',
-                url: baseUrl + 'data/food.geojson',
+                url: baseUrl + 'food.geojson',
                 template: 1,
                 style: 1
             },
             'license_entertainment': {
                 type: 'geojson',
                 field: 'address',
-                url: baseUrl + 'data/entertainment.geojson',
+                url: baseUrl + 'entertainment.geojson',
                 template: 3,
                 style: 3
+            },
+            'census_geography': {
+                type: 'geojson',
+                url: baseUrl + 'cb_2013_25_tract_500k.geojson'
             }
         },
         addFeaturesAsLayers = function (key, features) {
@@ -58,7 +62,9 @@ define([
 
     return {
 
-        addLayer: function (url, name, callback) {
+        addLayer: function (url, name, options, callback) {
+            var features;
+
             jQuery.ajax({
                 'async' : true,
                 'global' : false,
@@ -72,39 +78,49 @@ define([
                             data: data,
                             dataType: 'json',
                             success: function (done) {
-                                var features = map.data.addGeoJson(data);
-                                if (callback) {
-                                    callback(name, features);
-                                }
+                                features = map.data.addGeoJson(data, options || {});
+                                addFeaturesAsLayers(name, features);
                             }
                         });
                     } else {
-                        var features = map.data.addGeoJson(data);
-                        if (callback) {
-                            callback(name, features);
-                        }
+                        features = map.data.addGeoJson(data, options || {});
+                        addFeaturesAsLayers(name, features);
+                    }
+
+                    if (callback) {
+                        callback(data);
                     }
                 }
             });
         },
 
         //creates a fusion layer, mapping into the config by name
-        createLayer: function (name) {
+        createLayer: function (name, options, callback) {
             var table = tables[name];
 
             if (table.type === 'geojson') {
-                this.addLayer(table.url, name, addFeaturesAsLayers);
+                this.addLayer(table.url, name, options, callback);
             }
         },
 
         //displays a specified layer
-        displayLayer: function (name) {
+        displayLayer: function (name, options, callback) {
             var layer = layers[name];
 
             if (!layer) {
-                this.createLayer(name);
+                this.createLayer(name, options, callback);
             } else {
-                toggleHidden(name);
+                toggleHidden(name, options);
+            }
+        },
+
+        getLayer: function (name, callback) {
+            var layer = layers[name];
+
+            if (!layer) {
+                this.createLayer(name, callback);
+            } else {
+                callback(layer);
             }
         }
 

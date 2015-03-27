@@ -40,7 +40,6 @@ define([
                     console.log('census hash', data);
 
                     features.load(
-                        'http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.geojson',
                         data,
                         function () {
                             //stats.run(data);

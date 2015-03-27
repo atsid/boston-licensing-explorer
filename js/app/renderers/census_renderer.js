@@ -26,8 +26,6 @@ define([
                 bin = findIncomeBin(income),
                 color = colors[bin] || '#999';
 
-            console.log('color ' + color);
-
             return ({
                 fillOpacity: (selected || hovered) ? 0.8 : 0.6,
                 fillColor: color,

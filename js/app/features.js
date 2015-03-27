@@ -6,14 +6,16 @@ define([
     './fields',
     './map',
     './Table',
-    './renderer'
+    './renderer',
+    './layers'
 ], function (
     module,
     jQuery,
     fields,
     map,
     Table,
-    renderers
+    renderers,
+    layers
 ) {
 
     var config = module.config(),
@@ -77,10 +79,10 @@ define([
 
         //map our data hash values into the features
         d.forEach(function (feature) {
-            var id = feature.getId(),
-                d = censusdata[id];
+            var id = feature.getId();
+
             fields.forEach(function (field) {
-                feature.setProperty(field.field, d[field.key]);
+                feature.setProperty(field.field, censusdata[id][field.key]);
             });
         });
     };
@@ -90,6 +92,7 @@ define([
         renderer: function (feature) {
             var layer_name = feature.getProperty('layer'),
                 renderer;
+
             if (layer_name) {
                 renderer = renderers.getRenderer(layer_name);
             }
@@ -100,22 +103,15 @@ define([
                 return renderers.getRenderer('layer_census')(feature);
             }
         },
-
-        load: function (url, censusdata, callback) {
-            jQuery.ajax({
-                'async' : true,
-                'global' : false,
-                'url' : url,
-                'dataType': 'json',
-                'success': function (geodata) {
-                    map.data.addGeoJson(geodata, opts);
-                    console.log(this.renderer);
+        load: function (censusdata, callback) {
+            var cb = function (geodata) {
                     applyBindings(geodata, censusdata, this.renderer);
                     if (callback) {
                         callback.call(this);
                     }
-                }.bind(this)
-            });
+                }.bind(this);
+
+            layers.displayLayer('census_geography', opts, cb);
         }
     };
 
