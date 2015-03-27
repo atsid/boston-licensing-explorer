@@ -55,6 +55,15 @@ h2, h3 {
     text-align: left;
 }
 
+.legend-key {
+    text-align: right;
+    color: #2B688E;
+}
+
+.legend-value {
+    width: 100px;
+}
+
 .logos_top {
     margin-bottom: 10px;
     padding-bottom: 10px;

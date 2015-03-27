@@ -10,7 +10,8 @@ define([
     './fields',
     './layers',
     './search',
-    './stats'
+    './stats',
+    './Legend'
 ], function (
     module,
     jQuery,
@@ -21,8 +22,12 @@ define([
     fields,
     layers,
     search,
-    stats
+    stats,
+    Legend
 ) {
+
+    var config = module.config();
+
     return {
 
         initialize: function () {
@@ -38,10 +43,8 @@ define([
                         'http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.geojson',
                         data,
                         function () {
-                            stats.run(data);
-                            fields.getKeys().forEach(function (field) {
-                                console.log('stats for ' + field, stats.stats[field]);
-                            });
+                            //stats.run(data);
+                            new Legend(config.colors, config.color_labels).renderTo('#legend'); //this should go somewhere else
                         }
                     );
 

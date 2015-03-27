@@ -8,6 +8,10 @@ requirejs.config({
         'jqueryui': 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min'
     },
     'config': {
+        'app/main': {
+            colors: ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D', '#4F5C4B'],
+            color_labels: ['&lt;$20,000', '$20,000 - $60,000', '$60,000 - $80,000', '$80,000 - $100,000', '$100,000 - $150,000', '&gt;$150,000']
+        },
         'app/map': {
             //starting zoom and map centering options
             map: {
@@ -18,9 +22,9 @@ requirejs.config({
         },
         'app/renderers/census_renderer': {
             //http://www.colourlovers.com/palette/84571/echo
-            colors: ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D'],
+            colors: ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D', '#4F5C4B'],
             //this is pretty arbitrary, but ramps up to capture a little more granularity in the more common < 100k bins
-            income_bins: [20000, 60000, 80000, 100000, 150000]
+            income_bins: [20000, 60000, 80000, 100000, 150000, 500000]
         },
         'app/features': {
             //these are the geojson opts used for maps api loadGeoJson
