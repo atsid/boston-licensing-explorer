@@ -33,7 +33,7 @@ define([
 
     describe('geoprocessing.js', function () {
 
-        this.timeout(10000);
+        this.timeout(30000);
 
         var polygons,
             points;
@@ -97,8 +97,6 @@ define([
             },
                 assertionCount = 0;
 
-
-            
             geoprocessing.spatialJoinWithin(polygons, points, 'food_count');
 
             polygons.forEach(function (polygon) {

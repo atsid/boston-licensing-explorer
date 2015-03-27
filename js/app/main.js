@@ -11,18 +11,20 @@ define([
     './layers',
     './search',
     './stats',
+    './geoprocessing',
     './Legend'
 ], function (
     module,
     jQuery,
-    about,
     map,
+    about,
     census,
     features,
     fields,
     layers,
     search,
     stats,
+    geoprocessing,
     Legend
 ) {
 
@@ -42,7 +44,6 @@ define([
                     features.load(
                         data,
                         function () {
-                            //stats.run(data);
                             new Legend(config.colors, config.color_labels).renderTo('#legend'); //this should go somewhere else
                         }
                     );

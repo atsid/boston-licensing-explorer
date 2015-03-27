@@ -33,7 +33,7 @@ define({
 
     //finds minimum index in an array of sorted points that meets the specified long.
     //performs a modified binary search that accounts for non-exact match of longs.
-    minimumLngIndex: function (points, bounds) {
+    minLngIndex: function (points, bounds) {
 
         var min = 0,
             max = points.length - 1,
@@ -72,9 +72,10 @@ define({
 
         var start = Date.now(),
             getBounds = this.bounds,
-            getMinX = this.minimumLngIndex,
+            getMinX = this.minLngIndex,
             polyCount = 0,
-            comparisonCount = 0;
+            comparisonCount = 0,
+            current;
 
         //sort ascending x, so we can short-circuit hit test loops
         //this lets us only do an actual hit test on points within a longitude "band",
@@ -83,6 +84,8 @@ define({
             return p1.getGeometry().get().lng() - p2.getGeometry().get().lng();
         });
 
+        current = points.slice();
+
         polygons.forEach(function (polygon) {
 
             var count = 0,
@@ -90,7 +93,8 @@ define({
                 bounds,
                 index,
                 point,
-                i;
+                i,
+                next;
 
             try {
 
@@ -102,11 +106,13 @@ define({
                     });
 
                 bounds = getBounds(poly);
-                index = getMinX(points, bounds);
+                index = getMinX(current, bounds);
 
-                for (i = index; i < points.length; i += 1) {
+                next = current.slice(0, index); //start the next group with those we ignored for this poly
 
-                    point = points[i];
+                for (i = index; i < current.length; i += 1) {
+
+                    point = current[i];
                     comparisonCount += 1;
 
                     try {
@@ -119,7 +125,13 @@ define({
                         if (contained) {
                             count += 1;
                         } else if (lng > bounds.getNorthEast().lng()) {
+                            //we're not contained, and we've gone past the max long of the poly, so copy the rest from here
+                            next = next.concat(current.slice(i, current.length));
+                            current = next.slice();
                             break;
+                        } else {
+                            //not contained, but still within max long, so just push it and keep checking more
+                            next.push(point);
                         }
 
                     } catch (e) {
