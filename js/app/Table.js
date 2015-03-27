@@ -12,7 +12,7 @@ define([
         } else {
             return attribute.value;
         }
-    }
+    };
 
     //creates a new DOM table using specified attrs from a map feature
     //TODO: pull in something with real templating

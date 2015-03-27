@@ -1,5 +1,5 @@
 "use strict";
-
+/*globals window */
 var baseDataUrl = window.location.hostname === 'localhost' ? 'data/' : 'http://labs.atsid.com/hubhacks2/data/';
 
 requirejs.config({

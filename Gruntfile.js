@@ -25,8 +25,7 @@ module.exports = function (grunt) {
             server: {
                 options: {
                     port: 9001,
-                    base: '',
-                    keepalive: true
+                    base: ''
                 }
             }
         }
@@ -34,11 +33,12 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('test', ['karma']);
-    grunt.registerTask('server', ['connect']);
+    grunt.registerTask('server', ['connect', 'watch']);
     grunt.registerTask('default', ['lint', 'test']);
 
 };
