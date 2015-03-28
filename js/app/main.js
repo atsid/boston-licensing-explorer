@@ -10,7 +10,8 @@ define([
     './fields',
     './layers',
     './search',
-    './geoprocessing'
+    './geoprocessing',
+    './widget/status'
 ], function (
     module,
     jQuery,
@@ -21,7 +22,8 @@ define([
     fields,
     layers,
     search,
-    geoprocessing
+    geoprocessing,
+    status
 ) {
 
     var config = module.config();
@@ -30,20 +32,19 @@ define([
 
         initialize: function () {
 
+            status.show('Loading census API data...');
+
             //load the census data first, then pass it into the feature manager so it is ready for when the feature data returns
             census.load(
                 config.census_url,
                 function (data) {
-
-                    console.log('census hash', data);
-
                     features.load(
                         data,
                         function () {
+                            status.hide();
                             console.log('everything loaded');
                         }
                     );
-
                 }
             );
 

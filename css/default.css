@@ -92,6 +92,7 @@ label {
     position: absolute;
     bottom: 32px;
     padding-top: 10px;
+    border-top: 1px solid #eee;
 }
 
 .nav {
@@ -149,4 +150,20 @@ label {
     font-family: Verdana, Arial;
     font-size: 13px;
     font-weight: 300;
+}
+
+.hidden {
+    display: none;
+}
+
+#status {
+    position: absolute;
+    left: 10px;
+    bottom: 60px;
+}
+
+#status-text {
+    font-size: 11px;
+    color: #777;
+    vertical-align: text-top;
 }

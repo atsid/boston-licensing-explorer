@@ -4,12 +4,14 @@ define([
     'module',
     'jquery',
     './map',
-    './renderer'
+    './renderer',
+    './widget/status'
 ], function (
     module,
     jQuery,
     map,
-    renderer
+    renderer,
+    status
 ) {
 
     var config = module.config(),
@@ -40,6 +42,8 @@ define([
         addLayer: function (url, name, options, callback) {
             var features;
 
+            status.show('Loading layer [' + name + ']...');
+
             jQuery.ajax({
                 'async' : true,
                 'global' : false,
@@ -50,6 +54,8 @@ define([
                     features = map.data.addGeoJson(data, options || {});
                     addFeaturesAsLayers(name, features);
 
+                    status.hide();
+                    
                     if (callback) {
                         callback(data);
                     }
