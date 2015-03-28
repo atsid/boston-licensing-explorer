@@ -5,7 +5,7 @@ define([
     'jquery',
     './fields',
     './map',
-    './Table',
+    './widget/Table',
     './layers'
 ], function (
     module,

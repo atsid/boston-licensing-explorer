@@ -1,7 +1,7 @@
 "use strict";
 define([
     'module',
-    '../Legend'
+    '../widget/Legend'
 ], function (
     module,
     Legend

@@ -12,7 +12,7 @@ define([
     './search',
     './stats',
     './geoprocessing',
-    './Legend'
+    './widget/Legend'
 ], function (
     module,
     jQuery,
