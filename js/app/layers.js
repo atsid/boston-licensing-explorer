@@ -4,19 +4,17 @@ define([
     'module',
     'jquery',
     './map',
-    './renderer',
+    './layer_config',
     './widget/status'
 ], function (
     module,
     jQuery,
     map,
-    renderer,
+    layer_config,
     status
 ) {
 
-    var config = module.config(),
-        layerConfig = config.layers,
-        layers = {},
+    var layers = {},
         addFeaturesAsLayers = function (key, features) {
             layers[key] = features;
             layers['hidden_' + key] = false;
@@ -65,8 +63,7 @@ define([
 
         //creates a fusion layer, mapping into the config by name
         createLayer: function (name, options, callback) {
-            var conf = layerConfig[name];
-            this.addLayer(conf.url, name, options, callback);
+            this.addLayer(layer_config[name].url, name, options, callback);
         },
 
         //displays a specified layer
@@ -85,8 +82,11 @@ define([
             }
         },
 
+        //change the rendered data within a layer
+        //only really applies to the census right now,
+        //since everything else is point data
         changeData: function (name, attribute) {
-            renderer.setRendered(name, attribute);
+            layer_config[name].setAttribute(attribute);
             var legend = this.getLegend(name);
             if (legend) {
                 legend.renderTo('#legend');
@@ -107,15 +107,16 @@ define([
         },
 
         getRenderer: function (name) {
-            return renderer.getRenderer(name);
+            return layer_config[name].renderer;
         },
 
         getAttributeTableConfig: function (name) {
-            return renderer.getAttributeTableConfig(name);
+            return layer_config[name].attributeTableConfig;
         },
 
         getLegend: function (name) {
-            return renderer.getLegend(name);
+            var legend = layer_config[name].getLegend;
+            return legend && legend();
         }
 
     };

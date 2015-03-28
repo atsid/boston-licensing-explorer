@@ -5,11 +5,17 @@ define([
     module
 ) {
     return {
+
+        name: 'license_food',
+
+        url: module.config().url,
+
         renderer: function (feature) {
             return {
                 icon: 'img/small_red.png'
             };
         },
+
         attributeTableConfig: [{
             value: 'Food License',
             label: 'Type'
@@ -25,7 +31,7 @@ define([
         }, {
             key: 'DESCRIPT',
             label: 'Description'
-        }],
-        name: 'license_food'
+        }]
+
     };
 });

@@ -8,7 +8,8 @@ define([
     map,
     Legend
 ) {
-    var attributes = {
+    var attribute = 'INCOME',
+        attributes = {
             INCOME: {
                 //http://www.colourlovers.com/palette/84571/echo
                 colors: ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D', '#4F5C4B'],
@@ -21,11 +22,7 @@ define([
                 labels: ['&lt;7,500', '7,500 - 17,000', '17,000 - 29,000', '29,000 - 43,000', '43,000 - 85,000', '&gt;85,000'],
                 bins: [7500, 17000, 29000, 43000, 85000, 500000]
             }
-        },
-        currentAttribute = 'INCOME',
-        colors = attributes[currentAttribute].colors,
-        labels = attributes[currentAttribute].labels,
-        bins = attributes[currentAttribute].bins;
+        };
 
     function findBin(bins, value) {
         var index = bins.length - 1;
@@ -42,17 +39,18 @@ define([
 
         name: 'census_geography',
 
-        setAttribute: function (attribute) {
-            currentAttribute = attribute;
-            colors = attributes[currentAttribute].colors;
-            labels = attributes[currentAttribute].labels;
-            bins = attributes[currentAttribute].bins;
+        url: module.config().url,
+
+        setAttribute: function (attr) {
+            attribute = attr;
         },
 
         renderer: function (feature) {
             var selected = feature.getProperty('selected'),
                 hovered = feature.getProperty('hovered'),
-                value = feature.getProperty(currentAttribute),
+                value = feature.getProperty(attribute),
+                colors = attributes[attribute].colors,
+                bins = attributes[attribute].bins,
                 bin = findBin(bins, value),
                 color = colors[bin] || '#999';
 
@@ -89,6 +87,8 @@ define([
         }],
 
         getLegend: function () {
+            var colors = attributes[attribute].colors,
+                labels = attributes[attribute].labels;
             return new Legend(colors, labels);
         }
 

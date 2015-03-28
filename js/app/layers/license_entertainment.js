@@ -5,11 +5,17 @@ define([
     module
 ) {
     return {
+
+        name: 'license_entertainment',
+
+        url: module.config().url,
+
         renderer: function (feature) {
             return {
                 icon: 'img/small_yellow.png'
             };
         },
+
         attributeTableConfig: [{
             value: 'Entertainment License',
             label: 'Type'
@@ -25,7 +31,7 @@ define([
         }, {
             key: 'LICCATDESC',
             label: 'Description'
-        }],
-        name: 'license_entertainment'
+        }]
+
     };
 });

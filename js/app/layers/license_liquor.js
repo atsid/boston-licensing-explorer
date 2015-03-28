@@ -5,11 +5,17 @@ define([
     module
 ) {
     return {
+
+        name: 'license_liquor',
+
+        url: module.config().url,
+
         renderer: function (feature) {
             return {
                 icon: 'img/small_green.png'
             };
         },
+
         attributeTableConfig: [{
             value: 'Liquor License',
             label: 'Type'
@@ -25,7 +31,7 @@ define([
         }, {
             key: 'LICCATDESC',
             label: 'Description'
-        }],
-        name: 'license_liquor'
+        }]
+
     };
 });

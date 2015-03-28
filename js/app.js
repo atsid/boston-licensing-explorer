@@ -42,21 +42,17 @@ requirejs.config({
                 }
             }
         },
-        'app/layers': {
-            layers: {
-                'license_liquor' : {
-                    url: 'data/liquor.geojson'
-                },
-                'license_food': {
-                    url: 'data/food.geojson'
-                },
-                'license_entertainment': {
-                    url: 'data/entertainment.geojson'
-                },
-                'census_geography': {
-                    url: 'data/cb_2013_25_017-021-025_tract_500k.geojson'
-                }
-            }
+        'app/layers/license_liquor': {
+            url: 'data/liquor.geojson'
+        },
+        'app/layers/license_food': {
+            url: 'data/food.geojson'
+        },
+        'app/layers/license_entertainment': {
+            url: 'data/entertainment.geojson'
+        },
+        'app/layers/census_geography': {
+            url: 'data/cb_2013_25_017-021-025_tract_500k.geojson'
         }
     }
 });
