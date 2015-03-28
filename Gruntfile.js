@@ -25,7 +25,16 @@ module.exports = function (grunt) {
             server: {
                 options: {
                     port: 9001,
-                    base: ''
+                    middleware: function(connect) {
+                        return [
+                            function(req, res, next) {
+                                console.log('serving ' + req.url);
+                                res.setHeader('Access-Control-Allow-Origin', "*");
+                                next();
+                            },
+                            connect.static('./')
+                        ]
+                    }
                 }
             }
         }
