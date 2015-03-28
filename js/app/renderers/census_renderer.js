@@ -7,20 +7,21 @@ define([
     Legend
 ) {
     var config = module.config(),
-        findIncomeBin = function (income) {
-            var index = income_bins.length - 1;
-            income_bins.some(function (bin, idx) {
-                if (income < bin) {
-                    index = idx;
-                    return true;
-                }
-            });
-            return index;
-        },
         colors = config.colors,
         income_labels = config.income_labels,
         income_bins = config.income_bins,
         legend;
+
+    function findBin(bins, value) {
+        var index = bins.length - 1;
+        bins.some(function (bin, idx) {
+            if (value < bin) {
+                index = idx;
+                return true;
+            }
+        });
+        return index;
+    }
 
     legend = new Legend(colors, income_labels);
 
@@ -32,7 +33,7 @@ define([
             var selected = feature.getProperty('selected'),
                 hovered = feature.getProperty('hovered'),
                 income = feature.getProperty('INCOME'),
-                bin = findIncomeBin(income),
+                bin = findBin(income_bins, income),
                 color = colors[bin] || '#999';
 
             return ({
