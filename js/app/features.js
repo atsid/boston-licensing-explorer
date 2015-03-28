@@ -46,7 +46,7 @@ define([
             if (layerName) {
                 return layers.getAttributeTableConfig(layerName);
             } else {
-                return layers.getAttributeTableConfig('layer_census');
+                return layers.getAttributeTableConfig('census_geography');
             }
         }
 
@@ -95,7 +95,7 @@ define([
             if (renderer) {
                 return renderer(feature);
             } else {
-                return layers.getRenderer('layer_census')(feature);
+                return layers.getRenderer('census_geography')(feature);
             }
         },
 

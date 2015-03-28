@@ -88,6 +88,11 @@ define([
             } else {
                 toggleHidden(name, options);
             }
+
+            var legend = this.getLegend(name);
+            if (legend) {
+                legend.renderTo('#legend');
+            }
         },
 
         getLayer: function (name, callback) {
@@ -106,6 +111,10 @@ define([
 
         getAttributeTableConfig: function (name) {
             return renderer.getAttributeTableConfig(name);
+        },
+
+        getLegend: function (name) {
+            return renderer.getLegend(name);
         }
 
     };

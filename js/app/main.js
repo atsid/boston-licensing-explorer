@@ -44,7 +44,7 @@ define([
                     features.load(
                         data,
                         function () {
-                            new Legend(config.colors, config.color_labels).renderTo('#legend'); //this should go somewhere else
+                            console.log('everything loaded');
                         }
                     );
 

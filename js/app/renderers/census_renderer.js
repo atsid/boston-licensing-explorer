@@ -1,8 +1,10 @@
 "use strict";
 define([
-    'module'
+    'module',
+    '../Legend'
 ], function (
-    module
+    module,
+    Legend
 ) {
     var config = module.config(),
         findIncomeBin = function (income) {
@@ -16,9 +18,16 @@ define([
             return index;
         },
         colors = config.colors,
-        income_bins = config.income_bins;
+        income_labels = config.income_labels,
+        income_bins = config.income_bins,
+        legend;
+
+    legend = new Legend(colors, income_labels);
 
     return {
+
+        name: 'census_geography',
+
         renderer: function (feature) {
             var selected = feature.getProperty('selected'),
                 hovered = feature.getProperty('hovered'),
@@ -27,13 +36,14 @@ define([
                 color = colors[bin] || '#999';
 
             return ({
-                fillOpacity: (selected || hovered) ? 0.8 : 0.6,
+                fillOpacity: 0.6,
                 fillColor: color,
                 strokeColor: (selected || hovered) ? '#136EFB' : '#444',
                 strokeWeight: selected ? 4 : hovered ? 2 : 1,
                 zIndex: selected ? 2 : hovered ? 1 : 0
             });
         },
+
         attributeTableConfig: [{
             label: 'Type ',
             value: 'Census Tract'
@@ -56,6 +66,7 @@ define([
             key: 'GEOID',
             label: 'GEOID'
         }],
-        name: 'layer_census'
+
+        legend: legend
     };
 });

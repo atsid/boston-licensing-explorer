@@ -7,11 +7,13 @@ define([
 ], function (
 ) {
     var renderers = {},
-        attributeTableConfigs = {};
+        attributeTableConfigs = {},
+        legends = {};
 
     for (var i = 0; i < arguments.length; i++) {
         renderers[arguments[i].name] = arguments[i].renderer;
         attributeTableConfigs[arguments[i].name] = arguments[i].attributeTableConfig;
+        legends[arguments[i].name] = arguments[i].legend;
     }
 
     return {
@@ -20,6 +22,9 @@ define([
         },
         getAttributeTableConfig: function (name) {
             return attributeTableConfigs[name];
+        },
+        getLegend: function (name) {
+            return legends[name];
         }
     };
 });
