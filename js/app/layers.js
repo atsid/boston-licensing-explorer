@@ -15,7 +15,7 @@ define([
 ) {
 
     var config = module.config(),
-        tables = config.tables,
+        layerConfig = config.layers,
         layers = {},
         addFeaturesAsLayers = function (key, features) {
             layers[key] = features;
@@ -65,8 +65,8 @@ define([
 
         //creates a fusion layer, mapping into the config by name
         createLayer: function (name, options, callback) {
-            var table = tables[name];
-            this.addLayer(table.url, name, options, callback);
+            var conf = layerConfig[name];
+            this.addLayer(conf.url, name, options, callback);
         },
 
         //displays a specified layer

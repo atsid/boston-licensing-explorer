@@ -1,9 +1,9 @@
 "use strict";
 define([
-    './renderers/census_renderer',
-    './renderers/license_food_renderer',
-    './renderers/license_liquor_renderer',
-    './renderers/license_entertainment_renderer'
+    './layers/census_geography',
+    './layers/license_food',
+    './layers/license_liquor',
+    './layers/license_entertainment'
 ], function (
 ) {
     var renderers = {};

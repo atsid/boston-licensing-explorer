@@ -43,7 +43,7 @@ requirejs.config({
             }
         },
         'app/layers': {
-            tables: {
+            layers: {
                 'license_liquor' : {
                     url: 'data/liquor.geojson'
                 },
