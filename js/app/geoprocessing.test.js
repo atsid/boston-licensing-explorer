@@ -24,11 +24,15 @@ document.body.appendChild(canvas);
 define([
     'jquery',
     './map',
-    './geoprocessing'
+    './geoprocessing',
+    '../lib/text!data/food-small.geojson',
+    '../lib/text!data/tracts-small.geojson'
 ], function (
     jQuery,
     map,
-    geoprocessing
+    geoprocessing,
+    food,
+    tracts
 ) {
 
     describe('geoprocessing.js', function () {
@@ -40,38 +44,9 @@ define([
 
         //load up a map and test data sets
         //obviously this isn't really 'unit' testing unless we mock out the google APIs
-        beforeEach(function (done) {
-
-            var counter = 0;
-            function check() {
-                if (counter === 2) {
-                    done();
-                }
-            }
-
-            jQuery.ajax(
-                'http://labs.atsid.com/hubhacks2/data/tracts-small.geojson',
-                //'http://labs.atsid.com/hubhacks2/data/cb_2013_25_tract_500k.geojson',
-                {
-                    success: function (data) {
-                        polygons = map.data.addGeoJson(data);
-                        counter += 1;
-                        check();
-                    }
-                }
-            );
-
-            jQuery.ajax(
-                'http://labs.atsid.com/hubhacks2/data/food-small.geojson',
-                {
-                    success: function (data) {
-                        points = map.data.addGeoJson(data);
-                        counter += 1;
-                        check();
-                    }
-                }
-            );
-
+        beforeEach(function () {
+            polygons = map.data.addGeoJson(JSON.parse(tracts));
+            points = map.data.addGeoJson(JSON.parse(food));
         });
 
         it('spatial join WITHIN', function () {

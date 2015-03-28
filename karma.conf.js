@@ -13,7 +13,8 @@ module.exports = function(config) {
     files: [
         'https://maps.googleapis.com/maps/api/js?libraries=places,geometry',
         'js/test.js',
-        {pattern: 'js/app/**/*.js', included: false}
+        {pattern: 'js/**/*.js', included: false},
+        {pattern: 'data/**/*.geojson', included: false}
     ],
 
 

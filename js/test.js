@@ -19,6 +19,8 @@ requirejs.config({
 
     paths: {
         'app': '../app',
+        'data': './data',
+        'lib': '../lib',
         'jquery': 'http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min'
     },
 
