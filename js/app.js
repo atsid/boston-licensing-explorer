@@ -92,7 +92,7 @@ requirejs.config({
                 },
                 'census_geography': {
                     type: 'geojson',
-                    url: baseDataUrl + 'cb_2013_25_tract_500k.geojson'
+                    url: baseDataUrl + 'cb_2013_25_017-021-025_tract_500k.geojson'
                 }
             }
         }
