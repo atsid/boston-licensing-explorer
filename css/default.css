@@ -22,6 +22,16 @@ h2, h3 {
     width: 300px;
 }
 
+label {
+    color: #2B688E;
+    font-size: 12px;
+}
+
+#census-select {
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
 .checkboxes {
     margin-left: 10px;
     text-align: left;
@@ -41,27 +51,34 @@ h2, h3 {
     margin: 2px 0px;
 }
 
+.attrs-table, .legend-table {
+    font-size: 12px;
+}
+
+.attrs-key, .legend-key {
+    width: 140px;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.attrs-value, .legend-value {
+    width: 140px;
+    text-align: left;
+    padding-left: 5px;
+}
+
 .attrs-key {
     color: #B8D2DD;
-    text-align: right;
     font-weight: bold;
-    padding-right: 7px;
 }
 
 .attrs-value {
     color: #2B688E;
     border-left: 1px solid #eee;
-    padding-left: 7px;
-    text-align: left;
 }
 
 .legend-key {
-    text-align: right;
     color: #2B688E;
-}
-
-.legend-value {
-    width: 100px;
 }
 
 .logos_top {

@@ -28,7 +28,6 @@ module.exports = function (grunt) {
                     middleware: function(connect) {
                         return [
                             function(req, res, next) {
-                                console.log('serving ' + req.url);
                                 res.setHeader('Access-Control-Allow-Origin', "*");
                                 next();
                             },
