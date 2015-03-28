@@ -1,4 +1,3 @@
-/*globals window, requirejs */
 "use strict";
 
 var allTestFiles = [],

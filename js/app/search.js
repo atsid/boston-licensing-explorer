@@ -6,8 +6,6 @@ define([
     map
 ) {
 
-    /*jslint browser:true */
-    
     var markers = [];
     var input = document.getElementById('pac-input');        
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);

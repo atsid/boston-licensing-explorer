@@ -10,17 +10,18 @@
     "unused":    false,
     "onecase":   true,
     "indent":    4,
+    "browser":   true,
     "globals": {
-        "define": true,
-        "require": true,
-        "requirejs": true,
-        "it": true,
-        "describe": true,
-        "beforeEach": true,
-        "expect": true,
-        "before": true,
-        "afterEach": true,
-        "after": true,
-        "google": true
+        "define":       true,
+        "require":      true,
+        "requirejs":    true,
+        "it":           true,
+        "describe":     true,
+        "beforeEach":   true,
+        "expect":       true,
+        "before":       true,
+        "afterEach":    true,
+        "after":        true,
+        "google":       true
     }
 }
