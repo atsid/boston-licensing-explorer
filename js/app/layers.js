@@ -13,7 +13,6 @@ define([
 ) {
 
     var config = module.config(),
-        linterUrl = config.linterUrl,
         tables = config.tables,
         layers = {},
         addFeaturesAsLayers = function (key, features) {
@@ -47,21 +46,9 @@ define([
                 'url' : url,
                 'dataType': 'json',
                 'success': function (data) {
-                    if (config.validate) {
-                        jQuery.ajax({
-                            url: linterUrl,
-                            type: 'POST',
-                            data: data,
-                            dataType: 'json',
-                            success: function (done) {
-                                features = map.data.addGeoJson(data, options || {});
-                                addFeaturesAsLayers(name, features);
-                            }
-                        });
-                    } else {
-                        features = map.data.addGeoJson(data, options || {});
-                        addFeaturesAsLayers(name, features);
-                    }
+
+                    features = map.data.addGeoJson(data, options || {});
+                    addFeaturesAsLayers(name, features);
 
                     if (callback) {
                         callback(data);

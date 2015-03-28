@@ -8,11 +8,24 @@ define([
     map,
     Legend
 ) {
-    var config = module.config(),
+    var attributes = {
+            INCOME: {
+                //http://www.colourlovers.com/palette/84571/echo
+                colors: ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D', '#4F5C4B'],
+                labels: ['&lt;$43,000', '$43,000 - $67,000', '$67,000 - $88,000', '$88,000 - $113,000', '$113,000 - $151,000', '&gt;$151,000'],
+                bins: [43000, 67000, 88000, 113000, 151000, 500000]
+            },
+            DENSITY: {
+                //http://www.colourlovers.com/palette/114453/another_pearl
+                colors: ['#766158', '#A39189', '#B2A8A4', '#C1BFC0', '#CFD6DB', '#DEEDF6'],
+                labels: ['&lt;7,500', '7,500 - 17,000', '17,000 - 29,000', '29,000 - 43,000', '43,000 - 85,000', '&gt;85,000'],
+                bins: [7500, 17000, 29000, 43000, 85000, 500000]
+            }
+        },
         currentAttribute = 'INCOME',
-        colors = config.attributes[currentAttribute].colors,
-        labels = config.attributes[currentAttribute].labels,
-        bins = config.attributes[currentAttribute].bins;
+        colors = attributes[currentAttribute].colors,
+        labels = attributes[currentAttribute].labels,
+        bins = attributes[currentAttribute].bins;
 
     function findBin(bins, value) {
         var index = bins.length - 1;
@@ -31,9 +44,9 @@ define([
 
         setAttribute: function (attribute) {
             currentAttribute = attribute;
-            colors = config.attributes[currentAttribute].colors;
-            labels = config.attributes[currentAttribute].labels;
-            bins = config.attributes[currentAttribute].bins;
+            colors = attributes[currentAttribute].colors;
+            labels = attributes[currentAttribute].labels;
+            bins = attributes[currentAttribute].bins;
         },
 
         renderer: function (feature) {

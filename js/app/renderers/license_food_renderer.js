@@ -7,7 +7,7 @@ define([
     return {
         renderer: function (feature) {
             return {
-                icon: 'http://labs.atsid.com/hubhacks2/img/small_red.png'
+                icon: 'img/small_red.png'
             };
         },
         attributeTableConfig: [{
