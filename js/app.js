@@ -42,25 +42,18 @@ requirejs.config({
                 }
             }
         },
-        'app/stats': {
-            keys: ['B19013_001E', 'B01003_001E']
-        },
         'app/layers': {
             tables: {
                 'license_liquor' : {
-                    type: 'geojson',
                     url: 'data/liquor.geojson'
                 },
                 'license_food': {
-                    type: 'geojson',
                     url: 'data/food.geojson'
                 },
                 'license_entertainment': {
-                    type: 'geojson',
                     url: 'data/entertainment.geojson'
                 },
                 'census_geography': {
-                    type: 'geojson',
                     url: 'data/cb_2013_25_017-021-025_tract_500k.geojson'
                 }
             }

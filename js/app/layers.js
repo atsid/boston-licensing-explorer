@@ -55,7 +55,7 @@ define([
                     addFeaturesAsLayers(name, features);
 
                     status.hide();
-                    
+
                     if (callback) {
                         callback(data);
                     }
@@ -66,10 +66,7 @@ define([
         //creates a fusion layer, mapping into the config by name
         createLayer: function (name, options, callback) {
             var table = tables[name];
-
-            if (table.type === 'geojson') {
-                this.addLayer(table.url, name, options, callback);
-            }
+            this.addLayer(table.url, name, options, callback);
         },
 
         //displays a specified layer
