@@ -10,9 +10,7 @@ define([
     './fields',
     './layers',
     './search',
-    './stats',
-    './geoprocessing',
-    './widget/Legend'
+    './geoprocessing'
 ], function (
     module,
     jQuery,
@@ -23,9 +21,7 @@ define([
     fields,
     layers,
     search,
-    stats,
-    geoprocessing,
-    Legend
+    geoprocessing
 ) {
 
     var config = module.config();
@@ -51,7 +47,11 @@ define([
                 }
             );
 
-            //hook up the checkbox changes to toggle layer display
+            //hook up selects and checkboxes to change layer displays
+            jQuery('#census-select').change(function (e) {
+                layers.changeData('census_geography', e.target.value);
+            });
+
             jQuery('.cb').change(function (e) {
                 layers.displayLayer(e.target.id);
             });

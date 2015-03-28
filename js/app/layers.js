@@ -95,6 +95,18 @@ define([
             }
         },
 
+        changeData: function (name, attribute) {
+            renderer.setRendered(name, attribute);
+            var legend = this.getLegend(name);
+
+            if (legend) {
+                legend.renderTo('#legend');
+            }
+            //toggling on and off seems to be the only way to force a redraw with the new data
+            toggleHidden(name);
+            toggleHidden(name);
+        },
+
         getLayer: function (name, callback) {
             var layer = layers[name];
 

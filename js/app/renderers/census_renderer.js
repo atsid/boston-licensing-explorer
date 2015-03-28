@@ -1,16 +1,18 @@
 "use strict";
 define([
     'module',
+    '../map',
     '../widget/Legend'
 ], function (
     module,
+    map,
     Legend
 ) {
     var config = module.config(),
-        colors = config.colors,
-        income_labels = config.income_labels,
-        income_bins = config.income_bins,
-        legend;
+        currentAttribute = 'INCOME',
+        colors = config.attributes[currentAttribute].colors,
+        labels = config.attributes[currentAttribute].labels,
+        bins = config.attributes[currentAttribute].bins;
 
     function findBin(bins, value) {
         var index = bins.length - 1;
@@ -23,17 +25,22 @@ define([
         return index;
     }
 
-    legend = new Legend(colors, income_labels);
-
     return {
 
         name: 'census_geography',
 
+        setAttribute: function (attribute) {
+            currentAttribute = attribute;
+            colors = config.attributes[currentAttribute].colors;
+            labels = config.attributes[currentAttribute].labels;
+            bins = config.attributes[currentAttribute].bins;
+        },
+
         renderer: function (feature) {
             var selected = feature.getProperty('selected'),
                 hovered = feature.getProperty('hovered'),
-                income = feature.getProperty('INCOME'),
-                bin = findBin(income_bins, income),
+                value = feature.getProperty(currentAttribute),
+                bin = findBin(bins, value),
                 color = colors[bin] || '#999';
 
             return ({
@@ -68,6 +75,9 @@ define([
             label: 'GEOID'
         }],
 
-        legend: legend
+        getLegend: function () {
+            return new Legend(colors, labels);
+        }
+
     };
 });

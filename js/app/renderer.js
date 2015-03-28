@@ -6,25 +6,24 @@ define([
     './renderers/license_entertainment_renderer'
 ], function (
 ) {
-    var renderers = {},
-        attributeTableConfigs = {},
-        legends = {};
+    var renderers = {};
 
     for (var i = 0; i < arguments.length; i++) {
-        renderers[arguments[i].name] = arguments[i].renderer;
-        attributeTableConfigs[arguments[i].name] = arguments[i].attributeTableConfig;
-        legends[arguments[i].name] = arguments[i].legend;
+        renderers[arguments[i].name] = arguments[i];
     }
 
     return {
         getRenderer: function (name) {
-            return renderers[name];
+            return renderers[name].renderer;
+        },
+        setRendered: function (name, attribute) {
+            renderers[name].setAttribute(attribute);
         },
         getAttributeTableConfig: function (name) {
-            return attributeTableConfigs[name];
+            return renderers[name].attributeTableConfig;
         },
         getLegend: function (name) {
-            return legends[name];
+            return renderers[name].getLegend();
         }
     };
 });
