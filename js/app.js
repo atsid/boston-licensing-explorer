@@ -26,16 +26,14 @@ requirejs.config({
                 INCOME: {
                     //http://www.colourlovers.com/palette/84571/echo
                     colors: ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D', '#4F5C4B'],
-                    labels: ['&lt;$20,000', '$20,000 - $60,000', '$60,000 - $80,000', '$80,000 - $100,000', '$100,000 - $150,000', '&gt;$150,000'],
-                    //this is pretty arbitrary, but ramps up to capture a little more granularity in the more common < 100k bins
-                    bins: [20000, 60000, 80000, 100000, 150000, 500000]
+                    labels: ['&lt;$43,000', '$43,000 - $67,000', '$67,000 - $88,000', '$88,000 - $113,000', '$113,000 - $151,000', '&gt;$151,000'],
+                    bins: [43000, 67000, 88000, 113000, 151000, 500000]
                 },
                 DENSITY: {
                     //http://www.colourlovers.com/palette/114453/another_pearl
-                    colors: ['#A39189', '#B2A8A4', '#C1BFC0', '#CFD6DB', '#DEEDF6', '#4F5C4B'],
-                    labels: ['&lt;6,500', '6,500 - 16,500', '16,500 - 32,000', '32,000 - 65,000', '65,000 - 110,000', '&gt;110,000'],
-                    //this is pretty arbitrary, but ramps up to capture a little more granularity in the more common < 100k bins
-                    bins: [6500, 16500, 32000, 65000, 110000, 500000]
+                    colors: ['#766158', '#A39189', '#B2A8A4', '#C1BFC0', '#CFD6DB', '#DEEDF6'],
+                    labels: ['&lt;7,500', '7,500 - 17,000', '17,000 - 29,000', '29,000 - 43,000', '43,000 - 85,000', '&gt;85,000'],
+                    bins: [7500, 17000, 29000, 43000, 85000, 500000]
                 }
             }
         },

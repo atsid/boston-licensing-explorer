@@ -73,13 +73,16 @@ define([
         d.forEach(function (feature) {
             var id = feature.getId();
             fields.forEach(function (field) {
+                var result;
                 if (field.key) {
-                    feature.setProperty(field.field, censusdata[id][field.key]);
+                    result = parseInt(censusdata[id][field.key]);
                 } else if (field.calc) {
-                    feature.setProperty(field.field, field.calc.call(field, feature));
+                    result = field.calc.call(field, feature);
                 }
+                feature.setProperty(field.field, result);
             });
         });
+
     };
     
     return {

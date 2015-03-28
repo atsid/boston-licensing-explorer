@@ -98,7 +98,6 @@ define([
         changeData: function (name, attribute) {
             renderer.setRendered(name, attribute);
             var legend = this.getLegend(name);
-
             if (legend) {
                 legend.renderTo('#legend');
             }

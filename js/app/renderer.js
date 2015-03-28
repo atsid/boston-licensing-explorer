@@ -23,7 +23,8 @@ define([
             return renderers[name].attributeTableConfig;
         },
         getLegend: function (name) {
-            return renderers[name].getLegend();
+            var legend = renderers[name].getLegend;
+            return legend && legend();
         }
     };
 });
