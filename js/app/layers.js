@@ -103,7 +103,7 @@ define([
         },
         toggleHidden = function (layer, options, callback) {
             var loadCallback = function (name, options) {
-                if (showHeatMap) {
+                if (showHeatMap && name !== 'census_geography') {
                     toggleHiddenHeatmap(layer);
                 } else {
                     toggleHiddenPoints(layer, options);
@@ -197,7 +197,6 @@ define([
             //toggling on and off seems to be the only way to force a redraw with the new data
 
             toggleHidden(layer);
-
             toggleHidden(layer);
         },
 
