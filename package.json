@@ -1,6 +1,7 @@
 {
-    "name": "hubhacks2",
+    "name": "boston-licensing-explorer",
     "version": "0.0.1",
+    "repository": "https://github.com/atsid/boston-licensing-explorer.git",
     "licenses": [
         {
             "type": "Apache2.0",
