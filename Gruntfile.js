@@ -36,13 +36,20 @@ module.exports = function (grunt) {
                     }
                 }
             }
-        }
+        },
+        'gh-pages': {
+            options: {
+              base: ''
+            },
+            src: ['**']
+          }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-gh-pages');
 
     grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('test', ['karma']);
