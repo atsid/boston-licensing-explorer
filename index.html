@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/default.css">
+        <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/black-tie/jquery-ui.min.css">
+    </head>
+    <body>
+        <div id="controls">
+            <div class="logos_top">
+                <div><a href="http://hubhacks2.challengepost.com/" title="HubHacks2 Challenge"><img src="img/hubhacks_banner.jpg" width="300px"></a></div>
+            </div>
+
+            <h2>Features</h2>
+
+            <h3>Licenses</h3>
+            <div class="checkboxes">
+                <span class="cb"><lable>
+                    <input type="checkbox" id="toggle_heatmap">
+                    Show As Heatmap
+                </lable></span>
+                <span class="cb"><label>
+                    <input type="checkbox" id="license_food">
+                    <img src="img/small_red.png" height="9" width="9">
+                    Food
+                </label></span>
+                <span class="cb"><label>
+                    <input type="checkbox" id="license_liquor">
+                    <img src="img/small_green.png" height="9" width="9">
+                    Liquor
+                </label></span>
+                <span class="cb"><label>
+                    <input type="checkbox" id="license_entertainment">
+                    <img src="img/small_yellow.png" height="9" width="9">
+                    Entertainment
+                </label></span>
+            </div>
+
+            <h3>Census Data</h3>
+                <label for="census-select">Values:</label>
+                <select id="census-select">
+                    <option value="INCOME" selected>Median Income</option>
+                    <option value="DENSITY">Pop. Density</option>
+                </select>
+            <div id="legend"></div>
+            <h2>Location Details</h2>
+            <div id="feature-details"></div>
+
+            <div id="status" class="hidden">
+                <img src="img/spinner.gif" width=18 height=18 />
+                <span id="status-text"></span>
+            </div>
+            <div class="logos_bottom">
+                <div><a href="http://labs.atsid.com/" title="ATS Website" target="_blank"><img src="img/ats.png" width=50></a></div>
+            </div>
+            <div class='nav'>
+                <span id="about_link">About this page</span>
+            </div>
+        </div>
+        <input id="pac-input" class="search_control" type="text" placeholder="Search Box">
+        <div id="map-canvas"></div>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,visualization"></script>
+        <script data-main="js/app.js" src="js/lib/require.js"></script>
+    </body>
+</html>

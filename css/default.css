@@ -1,0 +1,169 @@
+html, body, #map-canvas {
+    font-family: Verdana, Arial;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/*http://www.colourlovers.com/palette/24741/a_cold_day*/
+h2, h3 {
+    color: #6EA9C3;
+}
+
+#map-canvas {
+    margin: 0;
+    padding: 0;
+}
+
+#controls {
+    margin: 10px;
+    text-align: center;
+    float: left;
+    width: 300px;
+}
+
+label {
+    color: #2B688E;
+    font-size: 12px;
+}
+
+#census-select {
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+.checkboxes {
+    margin-left: 10px;
+    text-align: left;
+}
+
+.cb {
+    margin: 2px;
+    display: block;
+}
+
+.cb label {
+    color: #2B688E;
+    cursor: pointer;
+}
+
+.cb img {
+    margin: 2px 0px;
+}
+
+.attrs-table, .legend-table {
+    font-size: 12px;
+}
+
+.attrs-key, .legend-key {
+    width: 140px;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.attrs-value, .legend-value {
+    width: 140px;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.attrs-key {
+    color: #B8D2DD;
+    font-weight: bold;
+}
+
+.attrs-value {
+    color: #2B688E;
+    border-left: 1px solid #eee;
+}
+
+.legend-key {
+    color: #2B688E;
+}
+
+.logos_top {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #B8D2DD;
+}
+
+.logos_bottom {
+    width: 300px;
+    position: absolute;
+    bottom: 32px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.nav {
+    position: absolute;
+    bottom: 12px;
+    width: 300px;
+    height: 12px;
+    padding-top: 4px;
+    color: #6EA9C3;
+    font-family: Verdana, Arial;
+    font-size: 12px;
+}
+
+.nav span {
+    cursor: pointer;
+}
+
+.search_control {
+    margin-top: 16px;
+    border: 1px solid transparent;
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    height: 32px;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+    background-color: #fff;
+    font-family: Verdana, Arial;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 400px;
+}
+
+#pac-input:focus {
+    border-color: #4d90fe;
+}
+
+.pac-container {
+    font-family: Verdana, Arial;
+}
+
+#type-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+    font-family: Verdana, Arial;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.hidden {
+    display: none;
+}
+
+#status {
+    position: absolute;
+    left: 10px;
+    bottom: 60px;
+}
+
+#status-text {
+    font-size: 11px;
+    color: #777;
+    vertical-align: text-top;
+}
