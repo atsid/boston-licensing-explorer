@@ -27,9 +27,11 @@ This site represents our submission to the hackathon. You can view it live [here
 
 ## Development instructions
 
-Because the app is entirely client-side, you don't really need to do anything special. Any web server that can host the project folder will do, but we've setup a development server with node+grunt so it's easy to work on.
+Because the app is entirely client-side, you don't really need to do anything special. Any web server that can host the project folder will do, but we've setup a development server with node + grunt so it's easy to work on.
 
-First, make sure you have node.js installed. Then, install the project development dependencies and get the grunt command line:
+First, make sure you have node.js installed from the [node.js website](https://nodejs.org/download/).
+
+Then, install the project development dependencies and get the grunt command line:
 
     npm install
     npm install -g grunt-cli
