@@ -40,6 +40,7 @@ define([
         name: 'census_geography',
 
         url: module.config().url,
+        type: 'polygons',
 
         setAttribute: function (attr) {
             attribute = attr;

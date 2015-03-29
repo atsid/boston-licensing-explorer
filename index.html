@@ -14,6 +14,10 @@
 
             <h3>Licenses</h3>
             <div class="checkboxes">
+                <span class="cb"><lable>
+                    <input type="checkbox" id="toggle_heatmap">
+                    Show As Heatmap
+                </lable></span>
                 <span class="cb"><label>
                     <input type="checkbox" id="license_food">
                     <img src="img/small_red.png" height="9" width="9">
@@ -54,7 +58,7 @@
         </div>
         <input id="pac-input" class="search_control" type="text" placeholder="Search Box">
         <div id="map-canvas"></div>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry,visualization"></script>
         <script data-main="js/app.js" src="js/lib/require.js"></script>
     </body>
 </html>

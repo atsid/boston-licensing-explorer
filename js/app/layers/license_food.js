@@ -7,6 +7,7 @@ define([
     return {
 
         name: 'license_food',
+        type: 'points',
 
         url: module.config().url,
 

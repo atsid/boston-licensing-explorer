@@ -54,7 +54,12 @@ define([
             });
 
             jQuery('.cb').change(function (e) {
-                layers.displayLayer(e.target.id);
+                if (e.target.id !== 'toggle_heatmap') {
+                    layers.displayLayer(e.target.id);
+                } else {
+                    console.log(' calling toggle heatmap ...');
+                    layers.toggleHeatMapDrawing();
+                }
             });
 
         }

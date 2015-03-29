@@ -7,6 +7,7 @@ define([
     return {
 
         name: 'license_liquor',
+        type: 'points',
 
         url: module.config().url,
 
