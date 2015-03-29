@@ -2,7 +2,7 @@
 
 The [Licensing Explorer](http://labs.atsid.com/boston-licensing-explorer/) is a tool to view existing food, entertainment, and liquor licenses for the City of Boston within the context of other map layers such as median income and popultion density. We thought this would be an interesting tool for both citizens and City planners to use. Citizens may be interested in finding relatively underserved regions as a way of identifying optimal locations for a new business. City planners may be interested in finding these same regions as targets for strategic economic development efforts.
 
-The City of Boston and its [Department of Innovation and Technology](http://www.cityofboston.gov/DoIT/) are sponsoring a [http://hubhacks2.challengepost.com/](public hackathon) to develop data visualizations from the City's [open data portal](https://data.cityofboston.gov/).
+The City of Boston and its [Department of Innovation and Technology](http://www.cityofboston.gov/DoIT/) are sponsoring a [public hackathon](http://hubhacks2.challengepost.com/) to develop data visualizations from the City's [open data portal](https://data.cityofboston.gov/).
 
 This site represents our submission to the hackathon. You can view it live [here](http://labs.atsid.com/boston-licensing-explorer/).
 
