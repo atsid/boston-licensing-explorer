@@ -82,6 +82,15 @@ define([
             key: 'SQ_MILE',
             label: 'Area (mi<sup>2</sup>)'
         }, {
+            key: 'license_food_count',
+            label: 'Food Licenses'
+        }, {
+            key: 'license_entertainment_count',
+            label: 'Entertainment Licenses'
+        }, {
+            key: 'license_liquor_count',
+            label: 'Liquor Licenses'
+        }, {
             key: 'GEOID',
             label: 'GEOID'
         }],

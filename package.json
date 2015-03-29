@@ -38,6 +38,7 @@
         "karma-requirejs": "0.2.2",
         "karma-chrome-launcher": "0.1.7",
         "karma-phantomjs-launcher": "0.1.4",
-        "simple-statistics": "0.9.1"
+        "simple-statistics": "0.9.1",
+        "geolib": "2.0.14"
     }
 }
