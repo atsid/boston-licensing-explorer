@@ -169,7 +169,8 @@ define([
 
         //displays a specified layer
         displayLayer: function (name, options, callback) {
-            var layer = getLayerMetaByName(name);
+            var layer = getLayerMetaByName(name),
+                legend = this.getLegend(name);
             if (!layer) {
                 layer = {
                     name: name,
@@ -180,6 +181,10 @@ define([
                 layerMeta.push(layer);
             }
 
+            if (legend) {
+                legend.renderTo('#legend');
+            }
+            
             toggleHidden(layer, options, callback);
         },
 
