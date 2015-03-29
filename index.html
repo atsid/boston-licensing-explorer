@@ -14,10 +14,6 @@
 
             <h3>Licenses</h3>
             <div class="checkboxes">
-                <span class="cb"><lable>
-                    <input type="checkbox" id="toggle_heatmap">
-                    Show As Heatmap
-                </lable></span>
                 <span class="cb"><label>
                     <input type="checkbox" id="license_food">
                     <img src="img/small_red.png" height="9" width="9">
@@ -33,13 +29,18 @@
                     <img src="img/small_yellow.png" height="9" width="9">
                     Entertainment
                 </label></span>
+                <span class="cb" style="border-top: 1px dashed #eee; margin-top: 4px;"><label>
+                    <input type="checkbox" id="toggle_heatmap">
+                    Show As Heatmap
+                </label></span>
             </div>
 
             <h3>Census Data</h3>
-                <label for="census-select">Values:</label>
+                <label for="census-select">Color Values:</label>
                 <select id="census-select">
                     <option value="INCOME" selected>Median Income</option>
                     <option value="DENSITY">Pop. Density</option>
+                    <option value="NONE">None</option>
                 </select>
             <div id="legend"></div>
             <h2>Location Details</h2>

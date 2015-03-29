@@ -21,6 +21,11 @@ define([
                 colors: ['#766158', '#A39189', '#B2A8A4', '#C1BFC0', '#CFD6DB', '#DEEDF6'],
                 labels: ['&lt;7,500', '7,500 - 17,000', '17,000 - 29,000', '29,000 - 43,000', '43,000 - 85,000', '&gt;85,000'],
                 bins: [7500, 17000, 29000, 43000, 85000, 500000]
+            },
+            NONE: {
+                colors: [],
+                labels: [],
+                bins: []
             }
         };
 
@@ -56,7 +61,7 @@ define([
                 color = colors[bin] || '#999';
 
             return ({
-                fillOpacity: 0.6,
+                fillOpacity: (attribute === 'NONE') ? 0.0 : 0.6,
                 fillColor: color,
                 strokeColor: (selected || hovered) ? '#136EFB' : '#444',
                 strokeWeight: selected ? 4 : hovered ? 2 : 1,
