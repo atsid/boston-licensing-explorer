@@ -13,14 +13,32 @@ define([
             INCOME: {
                 //http://www.colourlovers.com/palette/84571/echo
                 colors: ['#D8A97B', '#BC9E78', '#9F9275', '#828571', '#65796D', '#4F5C4B'],
-                labels: ['&lt;$43,000', '$43,000 - $67,000', '$67,000 - $88,000', '$88,000 - $113,000', '$113,000 - $151,000', '&gt;$151,000'],
-                bins: [43000, 67000, 88000, 113000, 151000, 500000]
+                labels: ['&lt;$45,000', '$45,000 - $65,000', '$65,000 - $90,000', '$90,000 - $115,000', '$115,000 - $150,000', '&gt;$150,000'],
+                bins: [45000, 65000, 90000, 115000, 150000, 500000]
             },
             DENSITY: {
                 //http://www.colourlovers.com/palette/114453/another_pearl
-                colors: ['#766158', '#A39189', '#B2A8A4', '#C1BFC0', '#CFD6DB', '#DEEDF6'],
-                labels: ['&lt;7,500', '7,500 - 17,000', '17,000 - 29,000', '29,000 - 43,000', '43,000 - 85,000', '&gt;85,000'],
-                bins: [7500, 17000, 29000, 43000, 85000, 500000]
+                colors: ['#DEEDF6', '#CFD6DB', '#C1BFC0', '#B2A8A4', '#A39189', '#766158'],
+                labels: ['&lt;5,000', '5,000 - 10,000', '10,000 - 20,000', '20,000 - 40,000', '40,000 - 80,000', '&gt;80,000'],
+                bins: [5000, 10000, 20000, 40000, 80000, 500000]
+            },
+            PERSON_FOOD: {
+                //http://www.colourlovers.com/palette/16580/%3C3_peachbelle
+                colors: ['#EDAFAA', '#E39295', '#DA7487', '#A6487A', '#732759', '#590447', '#999'],
+                labels: ['&lt;250', '250 - 500', '500 - 1,000', '1,000 - 2,500', '2,500 - 5,000', '&gt;5,000', 'No Data or 0 Licenses'],
+                bins: [250, 500, 1000, 2500, 5000, 10000]
+            },
+            PERSON_LIQUOR: {
+                //http://www.colourlovers.com/palette/16580/%3C3_peachbelle
+                colors: ['#EDAFAA', '#E39295', '#DA7487', '#A6487A', '#732759', '#590447', '#999'],
+                labels: ['&lt;250', '250 - 500', '500 - 1,000', '1,000 - 2,500', '2,500 - 5,000', '&gt;5,000', 'No Data or 0 Licenses'],
+                bins: [250, 500, 1000, 2500, 5000, 10000]
+            },
+            PERSON_ENT: {
+                //http://www.colourlovers.com/palette/16580/%3C3_peachbelle
+                colors: ['#EDAFAA', '#E39295', '#DA7487', '#A6487A', '#732759', '#590447', '#999'],
+                labels: ['&lt;100', '100 - 250', '250 - 500', '500 - 1,000', '1,000 - 2,500', '&gt;2,500', 'No Data or 0 Licenses'],
+                bins: [100, 250, 500, 1000, 2500, 10000]
             },
             NONE: {
                 colors: [],
@@ -31,6 +49,9 @@ define([
 
     function findBin(bins, value) {
         var index = bins.length - 1;
+        if (typeof value !== 'number') {
+            return bins.length; //extra 'no data' color at the end of each
+        }
         bins.some(function (bin, idx) {
             if (value < bin) {
                 index = idx;
