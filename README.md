@@ -17,7 +17,7 @@ The Licensing Explorer is a tool to view existing food, entertainment, and liquo
 
 ## Tools and technologies used
 
-* [ArcGIS](http://www.arcgis.com/features/) - ArcGIS was used for intial data exploration and prototyping of the map layers. A trial license supplied by Esri for the Hubhacks event was used.
+* [ArcGIS](http://www.arcgis.com/features/) - ArcGIS was used for initial data exploration and prototyping of the map layers. A trial license supplied by Esri for the Hubhacks event was used.
 * [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial) - the site uses Google Maps as the baseline mapping component.
 * [GitHub Pages](https://pages.github.com/) - we hosted our site using a `gh-pages` branch within the GitHub repository for easy, free hosting.
 * [node.js](https://nodejs.org/) - we did some data prep using node.js tools, and used it for our build system.
@@ -46,5 +46,19 @@ If you want to publish the site to your `gh-pages` branch so it is publicly host
 
     grunt publish
 
-  
-  
+## Additional Notes
+
+### Census Data
+
+This product uses the Census Bureau Data API but is not endorsed or certified by the Census Bureau.
+
+### Color Gradients
+
+Graduated color palettes for the census tract symbology were obtained from colourlovers.com:
+
+* [echo](http://www.colourlovers.com/palette/84571/echo)
+* [another pearl](http://www.colourlovers.com/palette/114453/another_pearl)
+* [peach belle](http://www.colourlovers.com/palette/16580/%3C3_peachbelle)
+
+Data bins were obtained by first running a [Jenks natural breaks](http://en.wikipedia.org/wiki/Jenks_natural_breaks_optimization)
+categorization on the layer data, and then rounding boundary numbers to more easily-readable values.
