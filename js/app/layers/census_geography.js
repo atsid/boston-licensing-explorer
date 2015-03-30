@@ -86,7 +86,7 @@ define([
             label: 'Pop. Density'
         }, {
             key: 'SQ_MILE',
-            label: 'Area (mi<sup>2</sup>)'
+            label: 'Land Area (mi<sup>2</sup>)'
         }, {
             key: 'license_food_count',
             label: 'Food Licenses'
@@ -97,8 +97,14 @@ define([
             key: 'license_liquor_count',
             label: 'Liquor Licenses'
         }, {
-            key: 'GEOID',
-            label: 'GEOID'
+            key: 'PERSON_FOOD',
+            label: 'Persons / Food Lic.'
+        }, {
+            key: 'PERSON_ENT',
+            label: 'Persons / Entertainment Lic.'
+        }, {
+            key: 'PERSON_LIQUOR',
+            label: 'Persons / Liquor Lic.'
         }],
 
         getLegend: function () {
