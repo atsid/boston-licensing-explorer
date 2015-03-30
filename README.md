@@ -59,7 +59,7 @@ Graduated color palettes for the census tract symbology were obtained from COLOU
 * [echo](http://www.colourlovers.com/palette/84571/echo) by [delphian](http://www.colourlovers.com/lover/delphian/loveNote)
 * [another pearl](http://www.colourlovers.com/palette/114453/another_pearl) by [velveteen](http://www.colourlovers.com/lover/velveteen/loveNote).
 * [peach belle](http://www.colourlovers.com/palette/16580/%3C3_peachbelle) by [Anitra](http://www.colourlovers.com/lover/Anitra/loveNote)
-* * [a cold day](http://www.colourlovers.com/palette/24741/a_cold_day) by [stinger](http://www.colourlovers.com/lover/stinger/loveNote)
+* [a cold day](http://www.colourlovers.com/palette/24741/a_cold_day) by [stinger](http://www.colourlovers.com/lover/stinger/loveNote)
 
 Data bins were obtained by first running a [Jenks natural breaks](http://en.wikipedia.org/wiki/Jenks_natural_breaks_optimization)
 categorization on the layer data, and then rounding boundary numbers to more easily-readable values.
