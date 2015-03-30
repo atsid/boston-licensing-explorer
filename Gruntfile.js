@@ -36,17 +36,27 @@ module.exports = function (grunt) {
                     }
                 }
             }
-        }
+        },
+        'gh-pages': {
+            options: {
+              base: '',
+              message: 'Publish from master',
+              add: true //won't remove remote files, so we can put our google analytics on the branch
+            },
+            src: ['**']
+          }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-gh-pages');
 
     grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('test', ['karma']);
     grunt.registerTask('server', ['connect', 'watch']);
+    grunt.registerTask('publish', ['gh-pages']);
     grunt.registerTask('default', ['lint', 'test']);
 
 };
