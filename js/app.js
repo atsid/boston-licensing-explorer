@@ -4,6 +4,7 @@ requirejs.config({
     'baseUrl': 'js/lib',
     'paths': {
         'app': '../app',
+        'text': './text',
         'jquery': 'http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min',
         'jqueryui': 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min'
     },

@@ -4,25 +4,23 @@ define([
     'module',
     'jquery',
     './map',
-    './about',
     './census',
     './features',
     './fields',
     './layers',
     './search',
-    './geoprocessing',
+    './widget/about',
     './widget/status'
 ], function (
     module,
     jQuery,
     map,
-    about,
     census,
     features,
     fields,
     layers,
     search,
-    geoprocessing,
+    about,
     status
 ) {
 

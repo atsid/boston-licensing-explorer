@@ -39,7 +39,9 @@ module.exports = function (grunt) {
         },
         'gh-pages': {
             options: {
-              base: ''
+              base: '',
+              message: 'Publish from master',
+              add: true //won't remove remote files, so we can put our google analytics on the branch
             },
             src: ['**']
           }
@@ -54,6 +56,7 @@ module.exports = function (grunt) {
     grunt.registerTask('lint', ['jshint']);
     grunt.registerTask('test', ['karma']);
     grunt.registerTask('server', ['connect', 'watch']);
+    grunt.registerTask('publish', ['gh-pages']);
     grunt.registerTask('default', ['lint', 'test']);
 
 };
