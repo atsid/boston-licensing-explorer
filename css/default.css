@@ -6,10 +6,27 @@ html, body, #map-canvas {
 }
 
 /*http://www.colourlovers.com/palette/24741/a_cold_day*/
-h2, h3 {
+h1, h2, h3 {
     color: #6EA9C3;
 }
 
+h1 {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    font-size: 28px;
+}
+
+h2 {
+    margin-top: 40px;
+    font-size: 18px;
+}
+
+h3 {
+    text-align: left;
+    margin-top: 24px;
+    font-style: italic;
+    font-size: 14px;
+}
 #map-canvas {
     margin: 0;
     padding: 0;
@@ -84,7 +101,7 @@ label {
 .logos_top {
     margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #B8D2DD;
+    border-bottom: 1px solid #eee;
 }
 
 .logos_bottom {
