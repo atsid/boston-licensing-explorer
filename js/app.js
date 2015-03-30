@@ -39,7 +39,26 @@ requirejs.config({
             },
             DENSITY: {
                 calc: function (feature) {
-                    return Math.round(feature.getProperty('POP') / feature.getProperty('SQ_MILE'));
+                    var pop = feature.getProperty('POP');
+                    return pop === 0 ? 0 : Math.round(pop / feature.getProperty('SQ_MILE'));
+                }
+            },
+            PERSON_FOOD: {
+                calc: function (feature) {
+                    var count = feature.getProperty('license_food_count');
+                    return count === 0 ? 'N/A' : Math.round(feature.getProperty('POP') / count);
+                }
+            },
+            PERSON_LIQUOR: {
+                calc: function (feature) {
+                    var count = feature.getProperty('license_liquor_count');
+                    return count === 0 ? 'N/A' : Math.round(feature.getProperty('POP') / count);
+                }
+            },
+            PERSON_ENT: {
+                calc: function (feature) {
+                    var count = feature.getProperty('license_entertainment_count');
+                    return count === 0 ? 'N/A' : Math.round(feature.getProperty('POP') / count);
                 }
             }
         },
