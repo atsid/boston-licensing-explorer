@@ -6,6 +6,19 @@ This site represents our submission to the hackathon. You can view it live at ht
 
 The Licensing Explorer is a tool to view existing food, entertainment, and liquor licenses for the City of Boston within the context of other map layers such as median income and population density. We thought this would be an interesting tool for both citizens and City planners to use. Citizens may be interested in finding relatively underserved regions as a way of identifying optimal locations to start a new business. City planners may be interested in finding these same regions as targets for strategic economic development efforts.
 
+## What can you do with it?
+
+* Overlay City of Boston data points for food establishments, liquor licenses, and entertainment licenses. These points can also be viewed as a heatmap.
+* View basic census tract data for the tracts in the City of Boston and bordering counties. This data includes median household income, population, land area, and a calculation of population density.
+* View geoprocessed data that combines the census tracts and license points:
+ * Number of licenses per census tract.
+ * Calculations for persons per license, as an indicator of under-served regions.
+
+## What's next?
+
+* We'd like to create a weighted average 'score' for each tract, by combining the income, density, and license calculations. This would ideally be user-editable, so potential business owners or City planners could run scenarios that optimized the display for different local conditions and pinpoint the best places to put a new business.
+* The spatial joining was done directly using the census tract data. Applying a buffer around each tract before computing the join could produce a more useful measurement, by accounting for establishments that occur on the tract borders and should therefore be counted more than once.
+
 ## Data sets
 * From the [Boston Open Data Portal](https://data.cityofboston.gov/)
   * [Active Food Licenses](https://data.cityofboston.gov/Permitting/Active-Food-Establishment-Licenses/gb6y-34cq)
