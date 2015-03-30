@@ -43,10 +43,13 @@ define([
 
             markers.push(marker);
 
-            // bounds.extend(place.geometry.location);
+            bounds.extend(place.geometry.location);
         }
-
-        // map.fitBounds(bounds);
+        
+        // center the map on the search result
+        if (places.length === 1) {
+            map.setCenter(places[0].geometry.location);
+        }
     });
 
     google.maps.event.addListener(map, 'bounds_changed', function () {
