@@ -1,3 +1,6 @@
+[![Dependency Status](https://david-dm.org/atsid/boston-licensing-explorer.svg)](https://david-dm.org/atsid/boston-licensing-explorer)
+[![devDependency Status](https://david-dm.org/atsid/boston-licensing-explorer/dev-status.svg)](https://david-dm.org/atsid/boston-licensing-explorer#info=devDependencies)
+
 # Boston Licensing Explorer
 
 The City of Boston and its [Department of Innovation and Technology](http://www.cityofboston.gov/DoIT/) are sponsoring a [public hackathon](http://hubhacks2.challengepost.com/) to develop data visualizations from the City's [open data portal](https://data.cityofboston.gov/).
